@@ -1,0 +1,11 @@
+{
+  "name": "judifiltre",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+  },
+  "scripts": {
+    "startClient": "cd client && yarn start",
+    "startBackendDev": "cd backend && yarn startDev"
+  }
+}
