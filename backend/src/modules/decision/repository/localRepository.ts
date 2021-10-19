@@ -1,4 +1,4 @@
-import { decisionType, publicityInfoType } from "@publicity-assessor-core";
+import { decisionType, publicityInfoType } from "@judifiltre-core";
 import { decision_123454 } from "./storage/jurinet/123454";
 import { decision_123455 } from "./storage/jurica/123455";
 import { decision_123456 } from "./storage/jurica/123456";

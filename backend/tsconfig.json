@@ -9,7 +9,7 @@
        "outDir": "dist",
        "baseUrl": ".",
        "strict": true,
-       "paths": {"@publicity-assessor-core": ["../client/src/core"]}
+       "paths": {"@judifiltre-core": ["../client/src/core"]}
     },
     "references": [
       { 

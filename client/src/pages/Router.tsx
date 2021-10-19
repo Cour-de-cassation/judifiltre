@@ -26,6 +26,7 @@ function Router() {
             />
           )}
         />
+        <Redirect path="/" to={{ pathname: routes.DEFAULT.getPath() }} />
       </Switch>
     </BrowserRouter>
   );

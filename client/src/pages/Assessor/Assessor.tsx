@@ -2,7 +2,6 @@ import React from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { publicityInfoModule, publicityInfoType } from "../../core";
 import { routes } from "../routes";
-import { DecisionDataFetcher } from "./DecisionDataFetcher";
 import { DecisionViewer } from "./DecisionViewer";
 import { PublicityInfosDataFetcher } from "./PublicityInfosDataFetcher";
 

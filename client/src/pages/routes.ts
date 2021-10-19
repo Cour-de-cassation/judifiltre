@@ -2,7 +2,7 @@ import { publicityInfoType } from "../core";
 
 export { routes };
 
-const ROUTE_PREFIX = "public-or-not-public";
+const ROUTE_PREFIX = "judifiltre";
 
 const routes = {
   ASSESSOR_HOME: {
