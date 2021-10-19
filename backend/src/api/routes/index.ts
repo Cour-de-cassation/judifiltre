@@ -21,7 +21,6 @@ function buildRoutes() {
       return;
     }
     const decision = await decisionService.findOne(parsedParams);
-    console.log(params);
     response.json(decision);
   });
   return router;
