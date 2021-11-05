@@ -9,13 +9,7 @@
        "outDir": "dist",
        "baseUrl": ".",
        "strict": true,
-       "paths": {"@judifiltre-core": ["../client/src/core"]}
     },
-    "references": [
-      { 
-          "path": "../client/src/core",
-      }
-  ],
     "include": [
        "src"
     ]

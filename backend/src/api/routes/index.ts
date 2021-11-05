@@ -1,5 +1,5 @@
 import express from "express";
-import { publicityInfoModule } from "../../../../client/src/core";
+import { publicityInfoModule } from "judifiltre-core";
 import { publicityInfoService } from "../../modules/publicityInfo";
 import { decisionService } from "../../modules/decision";
 

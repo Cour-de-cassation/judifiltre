@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { publicityInfoType } from "../../core";
+import { publicityInfoType } from "judifiltre-core";
 import { apiCaller, useApi, DataFetcher } from "../../services/api";
 
 export { PublicityInfosDataFetcher };

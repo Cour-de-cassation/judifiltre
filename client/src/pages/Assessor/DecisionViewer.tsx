@@ -1,5 +1,5 @@
 import React from "react";
-import { publicityInfoType } from "../../core";
+import { publicityInfoType } from "judifiltre-core";
 import { DecisionDataFetcher } from "./DecisionDataFetcher";
 
 export { DecisionViewer };

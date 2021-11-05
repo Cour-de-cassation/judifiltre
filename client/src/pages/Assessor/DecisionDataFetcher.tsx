@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { decisionType, publicityInfoType } from "../../core";
+import { publicityInfoType } from "judifiltre-core";
 import { apiCaller, useApi, DataFetcher } from "../../services/api";
 
 export { DecisionDataFetcher };
@@ -8,7 +8,9 @@ type paramsType = Pick<publicityInfoType, "_id" | "sourceDb">;
 
 function DecisionDataFetcher(props: {
   params: paramsType;
-  children: (fetched: { decision: decisionType }) => ReactElement;
+  children: (fetched: {
+    decision: { _id: number; text: string };
+  }) => ReactElement;
 }) {
   const decisionFetchInfo = useApi(
     buildFetchDecision(),
@@ -18,7 +20,7 @@ function DecisionDataFetcher(props: {
 
   return (
     <DataFetcher
-      buildComponentWithData={(decision: decisionType) =>
+      buildComponentWithData={(decision: { _id: number; text: string }) =>
         props.children({ decision })
       }
       fetchInfo={decisionFetchInfo}
@@ -33,7 +35,7 @@ function DecisionDataFetcher(props: {
     return async () => {
       const fetchInfo = await apiCaller.get("decision", props.params);
       return {
-        data: fetchInfo.data as decisionType,
+        data: fetchInfo.data as { _id: number; text: string },
         statusCode: fetchInfo.statusCode,
       };
     };
