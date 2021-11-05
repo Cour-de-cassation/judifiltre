@@ -1,5 +1,5 @@
 import { Express } from "express";
-import { MongoClient } from "mongodb";
+import { mongo } from "../lib";
 
 import { buildRoutes } from "./routes";
 
@@ -15,7 +15,9 @@ async function buildApi(app: Express) {
 
 async function setupMongo() {
   console.log(`Loading the Mongo database...`);
-  const client = new MongoClient(`mongodb://localhost:27017`);
-  await client.connect();
+  await mongo.initialize({
+    dbName: "judifiltreDb",
+    url: "mongodb://localhost:27017",
+  });
   console.log(`MongoDB ready!`);
 }

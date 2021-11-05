@@ -1,3 +1,3 @@
-import { buildRepository } from "./localRepository";
+import { buildRepository } from "./testRepository";
 
 export { buildRepository };
