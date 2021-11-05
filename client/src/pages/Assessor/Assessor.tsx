@@ -7,11 +7,9 @@ import { PublicityInfosDataFetcher } from "./PublicityInfosDataFetcher";
 
 export { Assessor };
 
-type assessorParamsType =
-  | {
-      publicityInfoId: string;
-    }
-  | undefined;
+type assessorParamsType = {
+  publicityInfoId?: string;
+};
 
 function Assessor() {
   const params = useParams<assessorParamsType>();
