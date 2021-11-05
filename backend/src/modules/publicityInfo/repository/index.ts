@@ -1,3 +1,3 @@
-import { buildRepository } from "./localRepository";
+import { buildPublicityInfoTestRepository } from "./buildPublicityInfoTestRepository";
 
-export { buildRepository };
+export { buildPublicityInfoTestRepository as buildRepository };

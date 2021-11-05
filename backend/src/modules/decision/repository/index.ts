@@ -1,3 +1,3 @@
-import { buildRepository } from "./testRepository";
+import { buildDecisionTestRepository } from "./buildDecisionTestRepository";
 
-export { buildRepository };
+export { buildDecisionTestRepository as buildRepository };

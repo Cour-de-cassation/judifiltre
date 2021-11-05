@@ -4,12 +4,10 @@ import { DecisionDataFetcher } from "./DecisionDataFetcher";
 
 export { DecisionViewer };
 
-function DecisionViewer(props: {
-  decisionParams: Pick<publicityInfoType, "_id" | "sourceDb">;
-}) {
+function DecisionViewer(props: { publicityInfoId: publicityInfoType["_id"] }) {
   return (
-    <DecisionDataFetcher params={props.decisionParams}>
-      {({ decision }) => <div>{decision.text}</div>}
+    <DecisionDataFetcher params={{ publicityInfoId: props.publicityInfoId }}>
+      {({ decision }) => <div>{decision}</div>}
     </DecisionDataFetcher>
   );
 }

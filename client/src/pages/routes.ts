@@ -9,9 +9,9 @@ const routes = {
     getPath: () => `/${ROUTE_PREFIX}/assessor`,
   },
   ASSESSOR_DOCUMENT: {
-    getPath: (params?: Pick<publicityInfoType, "_id" | "sourceDb">) =>
-      `/${ROUTE_PREFIX}/assessor/${params?._id || ":_id"}/${
-        params?.sourceDb || ":sourceDb"
+    getPath: (params?: { publicityInfoId: publicityInfoType["_id"] }) =>
+      `/${ROUTE_PREFIX}/assessor/${
+        params?.publicityInfoId || ":publicityInfoId"
       }`,
   },
   DEFAULT: { getPath: () => `/${ROUTE_PREFIX}` },

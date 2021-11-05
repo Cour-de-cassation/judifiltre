@@ -3,9 +3,9 @@ import { decision_123454 } from "./storage/jurinet/123454";
 import { decision_123455 } from "./storage/jurica/123455";
 import { decision_123456 } from "./storage/jurica/123456";
 
-export { buildRepository };
+export { buildDecisionTestRepository };
 
-function buildRepository() {
+function buildDecisionTestRepository() {
   const jurinetDecisions = [decision_123454];
   const juricaDecisions = [decision_123455, decision_123456];
 
@@ -14,31 +14,28 @@ function buildRepository() {
   };
 
   async function findOne({
-    _id,
+    sourceId,
     sourceDb,
-  }: Pick<publicityInfoType, "_id" | "sourceDb">) {
-    let decision: { _id: number; text: string } | undefined;
+  }: Pick<publicityInfoType, "sourceId" | "sourceDb">) {
+    let decisionText: string | undefined;
     switch (sourceDb) {
       case "jurica":
         const juricaDecision = juricaDecisions.find(
-          (decision) => decision._id === _id
+          (decision) => decision._id === sourceId
         );
         if (juricaDecision) {
-          decision = {
-            _id: juricaDecision._id,
-            text: juricaDecision.JDEC_HTML_SOURCE,
-          };
+          decisionText = juricaDecision.JDEC_HTML_SOURCE;
         }
         break;
       case "jurinet":
         const jurinetDecision = jurinetDecisions.find(
-          (decision) => decision._id === _id
+          (decision) => decision._id === sourceId
         );
         if (jurinetDecision) {
-          decision = { _id: jurinetDecision._id, text: jurinetDecision.XML };
+          decisionText = jurinetDecision.XML;
         }
         break;
     }
-    return decision;
+    return decisionText;
   }
 }

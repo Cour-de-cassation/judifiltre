@@ -5,11 +5,11 @@ export { decisionService };
 
 const decisionService = {
   async findOne({
-    _id,
+    sourceId,
     sourceDb,
-  }: Pick<publicityInfoType, "_id" | "sourceDb">) {
+  }: Pick<publicityInfoType, "sourceId" | "sourceDb">) {
     const decisionRepository = buildRepository();
 
-    return decisionRepository.findOne({ _id, sourceDb });
+    return decisionRepository.findOne({ sourceId, sourceDb });
   },
 };

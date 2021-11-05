@@ -1,6 +1,10 @@
 export { apiCaller };
 
-const DEFAULT_HEADER = { "Content-Type": "application/json" };
+const DEFAULT_HEADER = {
+  "Content-Type": "application/json",
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "Cross-Origin-Embedder-Policy": "require-corp",
+};
 
 type paramType = string | number;
 

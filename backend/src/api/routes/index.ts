@@ -1,5 +1,5 @@
 import express from "express";
-import { publicityInfoModule } from "judifiltre-core";
+import { idModule } from "judifiltre-core";
 import { publicityInfoService } from "../../modules/publicityInfo";
 import { decisionService } from "../../modules/decision";
 
@@ -13,14 +13,22 @@ function buildRoutes() {
   });
 
   router.get("/decision", async (request, response) => {
-    const params = request.query as { _id: string; sourceDb: string };
-    const parsedParams =
-      publicityInfoModule.lib.converter.convertParameters(params);
-    if (!parsedParams) {
+    const params = request.query as { publicityInfoId: string };
+    if (!params.publicityInfoId) {
       response.sendStatus(400);
       return;
     }
-    const decision = await decisionService.findOne(parsedParams);
+    const publicityInfo = await publicityInfoService.findById(
+      idModule.lib.buildId(params.publicityInfoId)
+    );
+    if (!publicityInfo) {
+      response.sendStatus(404);
+      return;
+    }
+    const decision = await decisionService.findOne({
+      sourceDb: publicityInfo.sourceDb,
+      sourceId: publicityInfo.sourceId,
+    });
     response.json(decision);
   });
   return router;
