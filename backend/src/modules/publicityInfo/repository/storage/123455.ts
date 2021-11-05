@@ -1,4 +1,4 @@
-import { publicityInfoType } from "@judifiltre-core";
+import { publicityInfoType } from "judifiltre-core";
 
 export { publicityInfo_123455 };
 

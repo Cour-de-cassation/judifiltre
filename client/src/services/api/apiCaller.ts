@@ -15,7 +15,10 @@ const apiCaller = {
     statusCode: number;
   }> {
     const response = await fetch(
-      buildUrlWithParams(`http://localhost:8080/api/${routeName}`, params),
+      buildUrlWithParams(
+        `http://localhost:8080/judifiltre/api/${routeName}`,
+        params
+      ),
       {
         cache: "default",
         headers: DEFAULT_HEADER,

@@ -1,4 +1,4 @@
-import { publicityInfoType } from "../core";
+import { publicityInfoType } from "judifiltre-core";
 
 export { routes };
 

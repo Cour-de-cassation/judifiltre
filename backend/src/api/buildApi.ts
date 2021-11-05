@@ -6,5 +6,5 @@ export { buildApi };
 function buildApi(app: Express) {
   const routes = buildRoutes();
 
-  app.use("/api", routes);
+  app.use("/judifiltre/api", routes);
 }

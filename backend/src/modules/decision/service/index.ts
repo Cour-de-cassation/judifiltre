@@ -1,4 +1,4 @@
-import { publicityInfoType } from "@judifiltre-core";
+import { publicityInfoType } from "judifiltre-core";
 import { buildRepository } from "../repository";
 
 export { decisionService };

@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { publicityInfoModule, publicityInfoType } from "../../core";
+import { publicityInfoModule, publicityInfoType } from "judifiltre-core";
 import { routes } from "../routes";
 import { DecisionViewer } from "./DecisionViewer";
 import { PublicityInfosDataFetcher } from "./PublicityInfosDataFetcher";

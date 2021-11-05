@@ -1,4 +1,4 @@
-import { decisionType, publicityInfoType } from "@judifiltre-core";
+import { publicityInfoType } from "judifiltre-core";
 import { decision_123454 } from "./storage/jurinet/123454";
 import { decision_123455 } from "./storage/jurica/123455";
 import { decision_123456 } from "./storage/jurica/123456";
@@ -17,7 +17,7 @@ function buildRepository() {
     _id,
     sourceDb,
   }: Pick<publicityInfoType, "_id" | "sourceDb">) {
-    let decision: decisionType | undefined;
+    let decision: { _id: number; text: string } | undefined;
     switch (sourceDb) {
       case "jurica":
         const juricaDecision = juricaDecisions.find(
