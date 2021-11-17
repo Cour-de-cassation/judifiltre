@@ -1,4 +1,4 @@
 // import { buildPublicityInfoTestRepository } from "./buildPublicityInfoTestRepository";
 import { buildPublicityInfoProdRepository } from "./buildPublicityInfoProdRepository";
 
-export { buildPublicityInfoProdRepository as buildRepository };
+export { buildPublicityInfoProdRepository as buildPublicityInfoRepository };

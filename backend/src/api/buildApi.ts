@@ -1,5 +1,5 @@
 import { Express } from "express";
-import { mongo } from "../lib";
+import { setupMongo } from "../app/setup";
 
 import { buildRoutes } from "./routes";
 
@@ -11,13 +11,4 @@ async function buildApi(app: Express) {
   app.use("/judifiltre/api", routes);
 
   await setupMongo();
-}
-
-async function setupMongo() {
-  console.log(`Loading the Mongo database...`);
-  await mongo.initialize({
-    dbName: "judifiltreDb",
-    url: "mongodb://localhost:27017",
-  });
-  console.log(`MongoDB ready!`);
 }

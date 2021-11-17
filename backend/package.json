@@ -6,8 +6,8 @@
     "startDev": "ts-node-dev ./src/index.ts",
     "lint": "eslint . --ext .ts",
     "start": "tsc && node ./dist/server.js",
-    "buildLocalDevDocker": "docker-compose -f docker-compose-dev.yml build",
-    "startLocalDevDocker": "docker-compose -f docker-compose-dev.yml up"
+    "buildLocalDevDocker": "docker-compose -f docker-compose.yml build",
+    "startLocalDevDocker": "docker-compose -f docker-compose.yml up"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core",
+    "lodash": "^4.17.21",
     "mongodb": "^4.1.3",
     "typescript": "^4.4.3"
   },
@@ -24,6 +25,7 @@
     "@types/body-parser": "^1.19.1",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/lodash": "^4.14.177",
     "@types/mongodb": "^4.0.7",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",

@@ -5,6 +5,7 @@
   "dependencies": {
   },
   "scripts": {
+    "initDbDev": "cd backend && node dist/app/scripts/initDbDev.js",
     "startClient": "cd client && yarn start",
     "startBackendDev": "cd backend && yarn startDev",
     "startDbDev": "cd backend && yarn buildLocalDevDocker && yarn startLocalDevDocker"

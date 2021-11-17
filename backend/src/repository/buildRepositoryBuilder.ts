@@ -19,6 +19,7 @@ function buildRepositoryBuilder<T extends { _id: idType }, U>({
     return {
       findAll,
       findById,
+      insert,
       ...customRepository,
     };
 
@@ -34,6 +35,11 @@ function buildRepositoryBuilder<T extends { _id: idType }, U>({
       }
 
       return result;
+    }
+
+    async function insert(item: T) {
+      const result = await collection.insertOne(item as any);
+      return result.insertedId;
     }
   };
 }
