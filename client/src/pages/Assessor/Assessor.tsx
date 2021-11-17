@@ -7,11 +7,9 @@ import { PublicityInfosDataFetcher } from "./PublicityInfosDataFetcher";
 
 export { Assessor };
 
-type assessorParamsType =
-  | {
-      publicityInfoId: string;
-    }
-  | undefined;
+type assessorParamsType = {
+  publicityInfoId?: string;
+};
 
 function Assessor() {
   const params = useParams<assessorParamsType>();
@@ -24,18 +22,22 @@ function Assessor() {
   return (
     <div>
       <PublicityInfosDataFetcher>
-        {({ publicityInfos }) => (
-          <div>
-            {publicityInfos.map((publicityInfo) => (
-              <div
-                key={publicityInfo.sourceId}
-                onClick={buildOnSelectPublicityInfo(publicityInfo._id)}
-              >
-                {publicityInfo._id}
-              </div>
-            ))}
-          </div>
-        )}
+        {({ publicityInfos }) =>
+          publicityInfos.length > 0 ? (
+            <div>
+              {publicityInfos.map((publicityInfo) => (
+                <div
+                  key={publicityInfo.sourceId}
+                  onClick={buildOnSelectPublicityInfo(publicityInfo._id)}
+                >
+                  {publicityInfo._id}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div>Pas de publicity Infos à traiter</div>
+          )
+        }
       </PublicityInfosDataFetcher>
       {!!publicityInfoId && (
         <DecisionViewer publicityInfoId={publicityInfoId} />

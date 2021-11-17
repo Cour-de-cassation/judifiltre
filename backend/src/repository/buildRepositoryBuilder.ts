@@ -17,10 +17,17 @@ function buildRepositoryBuilder<T extends { _id: idType }, U>({
     const customRepository = buildCustomRepository(collection);
 
     return {
+      clear,
       findAll,
       findById,
+      insert,
       ...customRepository,
     };
+
+    async function clear() {
+      await collection.deleteMany({});
+      return;
+    }
 
     async function findAll() {
       return collection.find().toArray();
@@ -34,6 +41,11 @@ function buildRepositoryBuilder<T extends { _id: idType }, U>({
       }
 
       return result;
+    }
+
+    async function insert(item: T) {
+      const result = await collection.insertOne(item as any);
+      return result.insertedId;
     }
   };
 }

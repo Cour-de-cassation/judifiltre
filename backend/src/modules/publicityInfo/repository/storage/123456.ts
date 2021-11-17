@@ -9,5 +9,4 @@ const publicityInfo_123456: publicityInfoType = {
   releasabilityStatus: "undetermined",
   jurisdiction: "CA",
   codeField: "45B",
-  publicityStatus: "nonPublic",
 };
