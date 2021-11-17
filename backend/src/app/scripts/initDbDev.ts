@@ -6,6 +6,7 @@ import { runScript } from "./runScript";
 const PUBLICITY_INFOS_COUNT = 20;
 
 async function initDbDev() {
+  await publicityInfoService.clear();
   const publicityInfos = range(PUBLICITY_INFOS_COUNT).map(() =>
     publicityInfoModule.lib.generatePublicityInfo({})
   );

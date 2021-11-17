@@ -4,6 +4,12 @@ import { buildPublicityInfoRepository } from "../repository";
 export { publicityInfoService };
 
 const publicityInfoService = {
+  async clear() {
+    const publicityInfoRepository = buildPublicityInfoRepository();
+
+    return publicityInfoRepository.clear();
+  },
+
   async findAll() {
     const publicityInfoRepository = buildPublicityInfoRepository();
 

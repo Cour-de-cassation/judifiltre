@@ -17,11 +17,17 @@ function buildRepositoryBuilder<T extends { _id: idType }, U>({
     const customRepository = buildCustomRepository(collection);
 
     return {
+      clear,
       findAll,
       findById,
       insert,
       ...customRepository,
     };
+
+    async function clear() {
+      await collection.deleteMany({});
+      return;
+    }
 
     async function findAll() {
       return collection.find().toArray();
