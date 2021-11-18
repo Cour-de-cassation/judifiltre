@@ -1,18 +1,20 @@
 import { idType } from "judifiltre-core";
-import { mongo, mongoCollectionType } from "../lib";
+import { mongo, mongoCollectionType, DB_NAMES } from "../lib";
 import { repositoryType } from "./repositoryType";
 
 export { buildRepositoryBuilder };
 
 function buildRepositoryBuilder<T extends { _id: idType }, U>({
+  dbName,
   collectionName,
   buildCustomRepository,
 }: {
+  dbName: typeof DB_NAMES[number];
   collectionName: string;
   buildCustomRepository: (collection: mongoCollectionType<T>) => U;
 }): () => repositoryType<T> & U {
   return () => {
-    const db = mongo.getDb();
+    const db = mongo[dbName].getDb();
     const collection = db.collection<T>(collectionName);
     const customRepository = buildCustomRepository(collection);
 

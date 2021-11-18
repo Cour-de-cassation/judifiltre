@@ -1,12 +1,17 @@
 import { MongoClient, Collection } from "mongodb";
 
-export { buildMongo, mongo };
+export { buildMongo, mongo, DB_NAMES };
 
 export type { mongoCollectionType };
 
 type mongoCollectionType<T> = Collection<T>;
 
-const mongo = buildMongo();
+const DB_NAMES = ["judifiltredb", "jurinet", "jurica"] as const;
+
+const mongo = {} as Record<
+  typeof DB_NAMES[number],
+  ReturnType<typeof buildMongo>
+>;
 
 function buildMongo() {
   let client: MongoClient | undefined;

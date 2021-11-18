@@ -7,6 +7,7 @@ const buildPublicityInfoProdRepository = buildRepositoryBuilder<
   publicityInfoType,
   {}
 >({
+  dbName: "judifiltredb",
   collectionName: "publicityInfos",
   buildCustomRepository: () => ({}),
 });
