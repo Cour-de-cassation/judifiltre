@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
+    "compile": "tsc",
     "startDev": "ts-node-dev ./src/index.ts",
     "lint": "eslint . --ext .ts",
     "start": "tsc && node ./dist/server.js",
-    "buildLocalDevDocker": "docker-compose -f docker-compose.yml build",
-    "startLocalDevDocker": "docker-compose -f docker-compose.yml up"
+    "buildLocalDevDocker": "docker-compose -f docker-compose-dev.yml build",
+    "startLocalDevDocker": "docker-compose -f docker-compose-dev.yml up"
   },
   "keywords": [],
   "author": "",

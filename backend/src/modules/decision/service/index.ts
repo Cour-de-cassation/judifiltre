@@ -1,5 +1,6 @@
 import { publicityInfoType } from "judifiltre-core";
-import { buildRepository } from "../repository";
+import { juricaDecisionService } from "../../juricaDecision";
+import { jurinetDecisionService } from "../../jurinetDecision";
 
 export { decisionService };
 
@@ -7,9 +8,20 @@ const decisionService = {
   async findOne({
     sourceId,
     sourceDb,
-  }: Pick<publicityInfoType, "sourceId" | "sourceDb">) {
-    const decisionRepository = buildRepository();
-
-    return decisionRepository.findOne({ sourceId, sourceDb });
+  }: Pick<publicityInfoType, "sourceId" | "sourceDb">): Promise<
+    string | undefined
+  > {
+    switch (sourceDb) {
+      case "jurica":
+        const juricaDecision = await juricaDecisionService.findByDocumentId(
+          sourceId
+        );
+        return juricaDecision?.JDEC_HTML_SOURCE;
+      case "jurinet":
+        const jurinetDecision = await jurinetDecisionService.findByDocumentId(
+          sourceId
+        );
+        return jurinetDecision?.XML;
+    }
   },
 };

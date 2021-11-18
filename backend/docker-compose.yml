@@ -1,11 +1,11 @@
 version: "3.1"
 
 services:
-  db:
+  judifiltredb:
     container_name: judifiltredb
     image: mongo:latest
     restart: always
     volumes:
-      - ./data:/data/db
+      - ./data:/data/judifiltredb
     ports:
       - 27017:27017

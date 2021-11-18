@@ -1,3 +1,5 @@
-import { mongoCollectionType, mongo } from "./mongo";
+import { mongoCollectionType, mongo, dbConfigs, buildMongo } from "./mongo";
 
-export { mongo, mongoCollectionType };
+export { mongo, dbConfigs, buildMongo };
+
+export type { mongoCollectionType };

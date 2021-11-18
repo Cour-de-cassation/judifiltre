@@ -1,12 +1,20 @@
-import { mongo } from "../lib";
+import { mongo, dbConfigs, buildMongo } from "../lib";
 
 export { setupMongo };
 
 async function setupMongo() {
-  console.log(`Loading the Mongo database...`);
-  await mongo.initialize({
-    dbName: "judifiltreDb",
-    url: "mongodb://localhost:27017",
-  });
+  console.log(`Setting up Mongo...`);
+  await Promise.all(
+    dbConfigs.map(async ({ dbName, port }) => {
+      console.log(`Loading ${dbName} database for port ${port}...`);
+      mongo[dbName] = buildMongo();
+      await mongo[dbName].initialize({
+        dbName,
+        url: `mongodb://localhost:${port}`,
+      });
+
+      console.log(`${dbName} ready!`);
+    })
+  );
   console.log(`MongoDB ready!`);
 }
