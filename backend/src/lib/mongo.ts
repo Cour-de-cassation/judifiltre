@@ -7,9 +7,9 @@ export type { mongoCollectionType };
 type mongoCollectionType<T> = Collection<T>;
 
 const dbConfigs = [
-  { dbName: "judifiltredb", port: 27017 },
   { dbName: "jurinet", port: 27018 },
   { dbName: "jurica", port: 27019 },
+  { dbName: "judifiltredb", port: 27017 },
 ] as const;
 
 const mongo = {} as Record<

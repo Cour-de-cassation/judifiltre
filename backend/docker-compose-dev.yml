@@ -16,7 +16,7 @@ services:
     volumes:
       - ./data:/data/jurinet
     ports:
-      - 27018:27018
+      - 27018:27017
   jurica:
     container_name: jurica
     image: mongo:latest
@@ -24,4 +24,4 @@ services:
     volumes:
       - ./data:/data/jurica
     ports:
-      - 27019:27019
+      - 27019:27017

@@ -6,7 +6,7 @@ async function setupMongo() {
   console.log(`Setting up Mongo...`);
   await Promise.all(
     dbConfigs.map(async ({ dbName, port }) => {
-      console.log(`Loading ${dbName} database...`);
+      console.log(`Loading ${dbName} database for port ${port}...`);
       mongo[dbName] = buildMongo();
       await mongo[dbName].initialize({
         dbName,
