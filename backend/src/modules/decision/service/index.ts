@@ -8,12 +8,20 @@ const decisionService = {
   async findOne({
     sourceId,
     sourceDb,
-  }: Pick<publicityInfoType, "sourceId" | "sourceDb">) {
+  }: Pick<publicityInfoType, "sourceId" | "sourceDb">): Promise<
+    string | undefined
+  > {
     switch (sourceDb) {
       case "jurica":
-        return juricaDecisionService.findByDocumentId(sourceId);
+        const juricaDecision = await juricaDecisionService.findByDocumentId(
+          sourceId
+        );
+        return juricaDecision?.JDEC_HTML_SOURCE;
       case "jurinet":
-        return jurinetDecisionService.findByDocumentId(sourceId);
+        const jurinetDecision = await jurinetDecisionService.findByDocumentId(
+          sourceId
+        );
+        return jurinetDecision?.XML;
     }
   },
 };

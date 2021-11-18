@@ -29,6 +29,10 @@ function buildRoutes() {
       sourceDb: publicityInfo.sourceDb,
       sourceId: publicityInfo.sourceId,
     });
+    if (!decision) {
+      response.sendStatus(404);
+      return;
+    }
     response.json(decision);
   });
   return router;
