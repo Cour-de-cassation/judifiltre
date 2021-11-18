@@ -1,0 +1,27 @@
+version: "3.1"
+
+services:
+  judifiltredb:
+    container_name: judifiltredb
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./data:/data/judifiltredb
+    ports:
+      - 27017:27017
+  jurinet:
+    container_name: jurinet
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./data:/data/jurinet
+    ports:
+      - 27018:27018
+  jurica:
+    container_name: jurica
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./data:/data/jurica
+    ports:
+      - 27019:27019

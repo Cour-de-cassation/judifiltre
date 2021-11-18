@@ -1,15 +1,19 @@
 import { MongoClient, Collection } from "mongodb";
 
-export { buildMongo, mongo, DB_NAMES };
+export { buildMongo, mongo, dbConfigs };
 
 export type { mongoCollectionType };
 
 type mongoCollectionType<T> = Collection<T>;
 
-const DB_NAMES = ["judifiltredb", "jurinet", "jurica"] as const;
+const dbConfigs = [
+  { dbName: "judifiltredb", port: 27017 },
+  { dbName: "jurinet", port: 27018 },
+  { dbName: "jurica", port: 27019 },
+] as const;
 
 const mongo = {} as Record<
-  typeof DB_NAMES[number],
+  typeof dbConfigs[number]["dbName"],
   ReturnType<typeof buildMongo>
 >;
 
