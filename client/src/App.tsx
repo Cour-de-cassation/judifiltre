@@ -4,10 +4,8 @@ import { Router } from "./pages/Router";
 
 export { App };
 
-function App() {
-  return (
-    <ThemeProvider>
-      <Router />;
-    </ThemeProvider>
-  );
-}
+const App = () => (
+  <ThemeProvider>
+    <Router />
+  </ThemeProvider>
+);
