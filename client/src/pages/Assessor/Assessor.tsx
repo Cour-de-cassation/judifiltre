@@ -4,6 +4,7 @@ import { idModule, publicityInfoType } from "judifiltre-core";
 import { routes } from "../routes";
 import { DecisionViewer } from "./DecisionViewer";
 import { PublicityInfosDataFetcher } from "./PublicityInfosDataFetcher";
+import { PublicityInfosPanel } from "./PublicityInfosPanel";
 
 export { Assessor };
 
@@ -13,7 +14,6 @@ type assessorParamsType = {
 
 function Assessor() {
   const params = useParams<assessorParamsType>();
-  const history = useHistory();
 
   const publicityInfoId = params?.publicityInfoId
     ? idModule.lib.buildId(params.publicityInfoId)
@@ -24,16 +24,7 @@ function Assessor() {
       <PublicityInfosDataFetcher>
         {({ publicityInfos }) =>
           publicityInfos.length > 0 ? (
-            <div>
-              {publicityInfos.map((publicityInfo) => (
-                <div
-                  key={publicityInfo.sourceId}
-                  onClick={buildOnSelectPublicityInfo(publicityInfo._id)}
-                >
-                  {publicityInfo._id}
-                </div>
-              ))}
-            </div>
+            <PublicityInfosPanel publicityInfos={publicityInfos} />
           ) : (
             <div>Pas de publicity Infos à traiter</div>
           )
@@ -44,12 +35,4 @@ function Assessor() {
       )}
     </div>
   );
-
-  function buildOnSelectPublicityInfo(
-    publicityInfoId: publicityInfoType["_id"]
-  ) {
-    return () => {
-      history.push(routes.ASSESSOR_DOCUMENT.getPath({ publicityInfoId }));
-    };
-  }
 }
