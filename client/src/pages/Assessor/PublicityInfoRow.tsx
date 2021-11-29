@@ -13,7 +13,7 @@ function PublicityInfoRow(props: { publicityInfo: publicityInfoType }) {
       <div>{props.publicityInfo.sourceId}</div>
       <div>{props.publicityInfo.jurisdiction}</div>
       <div>{props.publicityInfo.codeField}</div>
-      <div>{props.publicityInfo.publicityRequest}</div>
+      <div>{props.publicityInfo.publicityRequest || "-"}</div>
       <div>{props.publicityInfo.releasabilityStatus}</div>
     </div>
   );

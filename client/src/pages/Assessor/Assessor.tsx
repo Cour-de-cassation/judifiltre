@@ -19,8 +19,10 @@ function Assessor() {
     ? idModule.lib.buildId(params.publicityInfoId)
     : undefined;
 
+  const styles = buildStyles();
+
   return (
-    <div>
+    <div style={styles.container}>
       <PublicityInfosDataFetcher>
         {({ publicityInfos }) =>
           publicityInfos.length > 0 ? (
@@ -35,4 +37,12 @@ function Assessor() {
       )}
     </div>
   );
+}
+
+function buildStyles() {
+  return {
+    container: {
+      display: "flex",
+    },
+  };
 }

@@ -1,18 +1,16 @@
 import React from "react";
 import { publicityInfoType } from "judifiltre-core";
-import { useHistory } from "react-router";
-import { routes } from "../routes";
-import { tableRowFieldType, Text } from "pelta-design-system";
-import { wordings } from "../../wordings";
 import { PublicityInfoRow } from "./PublicityInfoRow";
+import { heights } from "pelta-design-system";
 
 export { PublicityInfosPanel };
 
-function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[] }) {
-  const history = useHistory();
+const WIDTH = 500;
 
+function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[] }) {
+  const styles = buildStyles();
   return (
-    <div>
+    <div style={styles.panel}>
       {props.publicityInfos.map((publicityInfo) => (
         <PublicityInfoRow
           key={publicityInfo.sourceId}
@@ -21,12 +19,14 @@ function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[] }) {
       ))}
     </div>
   );
+}
 
-  function buildOnSelectPublicityInfo(
-    publicityInfoId: publicityInfoType["_id"]
-  ) {
-    return () => {
-      history.push(routes.ASSESSOR_DOCUMENT.getPath({ publicityInfoId }));
-    };
-  }
+function buildStyles() {
+  return {
+    panel: {
+      width: WIDTH,
+      height: heights.adminPanel,
+      overflowY: "scroll",
+    },
+  } as const;
 }
