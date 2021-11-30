@@ -1,7 +1,11 @@
 import express from "express";
-import { idModule } from "judifiltre-core";
+import { idModule, publicityInfoType } from "judifiltre-core";
 import { publicityInfoService } from "../../modules/publicityInfo";
 import { decisionService } from "../../modules/decision";
+import {
+  parsePublicityInfos,
+  publicityInfoDtoType,
+} from "./lib/parsePublicityInfos";
 
 export { buildRoutes };
 
@@ -17,6 +21,16 @@ function buildRoutes() {
       await publicityInfoService.findAllDecisionsToRelease();
     response.json(publicityInfos);
   });
+
+  router.post<"publicityInfos", any, Array<publicityInfoDtoType>>(
+    "/publicityInfos",
+    async (request, response) => {
+      const parsedPublicityInfos = parsePublicityInfos(request.body);
+      await publicityInfoService.insertMany(parsedPublicityInfos);
+      response.sendStatus(201);
+      response.send(`${parsedPublicityInfos.length} publicityInfos created`);
+    }
+  );
 
   router.get("/decision", async (request, response) => {
     const params = request.query as { publicityInfoId: string };
