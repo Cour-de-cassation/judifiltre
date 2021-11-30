@@ -14,5 +14,11 @@ const buildPublicityInfoProdRepository = buildRepositoryBuilder<
     findAllFrozen: async () => {
       return collection.find({ "publicity.isFrozen": true }).toArray();
     },
+    updateAssessmentForOne: async (_id, assessment) => {
+      await collection.updateOne(
+        { _id },
+        { $set: { "publicity.assessment": assessment } }
+      );
+    },
   }),
 });

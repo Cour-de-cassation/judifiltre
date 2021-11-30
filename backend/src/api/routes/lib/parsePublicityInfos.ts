@@ -1,10 +1,10 @@
 import { idModule, publicityInfoType } from "judifiltre-core";
 
-export type { publicityInfoDtoType };
+export type { publicityInfoCreationDtoType };
 
 export { parsePublicityInfos };
 
-type publicityInfoDtoType = {
+type publicityInfoCreationDtoType = {
   sourceId: publicityInfoType["sourceId"];
   sourceDb: publicityInfoType["sourceDb"];
   decisionDate: string;
@@ -14,7 +14,7 @@ type publicityInfoDtoType = {
 };
 
 function parsePublicityInfos(
-  publicityInfosDto: Array<publicityInfoDtoType>
+  publicityInfosDto: Array<publicityInfoCreationDtoType>
 ): Array<publicityInfoType> {
   return publicityInfosDto.map((publicityInfoDto) => {
     const decisionDate = getValidDate(publicityInfoDto.decisionDate);
