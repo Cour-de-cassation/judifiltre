@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react";
 import { idModule, publicityInfoType } from "judifiltre-core";
 import { apiCaller, useApi, DataFetcher } from "../../services/api";
-import { ListSubheader } from "@material-ui/core";
 
 export { PublicityInfosDataFetcher };
 
