@@ -16,6 +16,35 @@ const publicityInfoService = {
     return publicityInfoRepository.findAll();
   },
 
+  async findAllDecisionsToRelease() {
+    const publicityInfoRepository = buildPublicityInfoRepository();
+
+    const frozenPublicityInfos = await publicityInfoRepository.findAll();
+    let partiallyReleasableDecisions = [];
+    let releasableDecisions = [];
+    for (const publicityInfo of frozenPublicityInfos) {
+      switch (publicityInfo.publicity.assessment?.kind) {
+        case "public":
+          releasableDecisions.push({
+            sourceId: publicityInfo.sourceId,
+            sourceDb: publicityInfo.sourceDb,
+          });
+          break;
+        case "partiallyPublic":
+          partiallyReleasableDecisions.push({
+            sourceId: publicityInfo.sourceId,
+            sourceDb: publicityInfo.sourceDb,
+            text: publicityInfo.publicity.assessment.publicExtract,
+          });
+          break;
+      }
+    }
+    return {
+      partiallyReleasableDecisions,
+      releasableDecisions,
+    };
+  },
+
   async findById(_id: publicityInfoType["_id"]) {
     const publicityInfoRepository = buildPublicityInfoRepository();
 
