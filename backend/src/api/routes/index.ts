@@ -1,10 +1,10 @@
 import express from "express";
-import { idModule, publicityInfoType } from "judifiltre-core";
+import { idModule } from "judifiltre-core";
 import { publicityInfoService } from "../../modules/publicityInfo";
 import { decisionService } from "../../modules/decision";
 import {
   parsePublicityInfos,
-  publicityInfoDtoType,
+  publicityInfoCreationDtoType,
 } from "./lib/parsePublicityInfos";
 
 export { buildRoutes };
@@ -16,13 +16,22 @@ function buildRoutes() {
     response.json(publicityInfos);
   });
 
+  router.put("/publicityInfos/:publicityInfoId", async (request, response) => {
+    const { publicityInfoId } = request.params;
+    const { publicityAssessment } = request.body;
+    await publicityInfoService.updateAssessmentForPublicityInfo(
+      idModule.lib.buildId(publicityInfoId),
+      publicityAssessment
+    );
+  });
+
   router.get("/decisions-to-release", async (request, response) => {
     const publicityInfos =
       await publicityInfoService.findAllDecisionsToRelease();
     response.json(publicityInfos);
   });
 
-  router.post<"publicityInfos", any, Array<publicityInfoDtoType>>(
+  router.post<"publicityInfos", any, Array<publicityInfoCreationDtoType>>(
     "/publicityInfos",
     async (request, response) => {
       const parsedPublicityInfos = parsePublicityInfos(request.body);

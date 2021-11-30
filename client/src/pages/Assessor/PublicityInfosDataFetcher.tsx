@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { publicityInfoType } from "judifiltre-core";
+import { idModule, publicityInfoType } from "judifiltre-core";
 import { apiCaller, useApi, DataFetcher } from "../../services/api";
 
 export { PublicityInfosDataFetcher };
@@ -20,7 +20,10 @@ function PublicityInfosDataFetcher(props: {
     return async () => {
       const fetchInfo = await apiCaller.get("publicityInfos");
       return {
-        data: fetchInfo.data as publicityInfoType[],
+        data: (fetchInfo.data as publicityInfoType[]).map((publicityInfo) => ({
+          ...publicityInfo,
+          _id: idModule.lib.buildId(publicityInfo._id),
+        })),
         statusCode: fetchInfo.statusCode,
       };
     };

@@ -51,6 +51,18 @@ const publicityInfoService = {
     return publicityInfoRepository.findById(_id);
   },
 
+  async updateAssessmentForPublicityInfo(
+    publicityInfoId: publicityInfoType["_id"],
+    publicityAssessment: publicityInfoType["publicity"]["assessment"]
+  ) {
+    const publicityInfoRepository = buildPublicityInfoRepository();
+
+    await publicityInfoRepository.updateAssessmentForOne(
+      publicityInfoId,
+      publicityAssessment
+    );
+  },
+
   async insertMany(publicityInfos: publicityInfoType[]) {
     const publicityInfoRepository = buildPublicityInfoRepository();
 
