@@ -12,6 +12,12 @@ function buildRoutes() {
     response.json(publicityInfos);
   });
 
+  router.get("/decisions-to-release", async (request, response) => {
+    const publicityInfos =
+      await publicityInfoService.findAllDecisionsToRelease();
+    response.json(publicityInfos);
+  });
+
   router.get("/decision", async (request, response) => {
     const params = request.query as { publicityInfoId: string };
     if (!params.publicityInfoId) {
