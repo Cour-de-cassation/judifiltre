@@ -12,7 +12,7 @@ import { routes } from "../routes";
 
 export { PublicityInfosPanel };
 
-const WIDTH = 500;
+const WIDTH = 550;
 
 function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[] }) {
   const history = useHistory();
@@ -23,17 +23,27 @@ function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[] }) {
   >();
   return (
     <div style={styles.panel}>
-      {sortedPublicityInfos.map((publicityInfo) => (
-        <PublicityInfoRow
-          isSelected={
-            !!selectedPublicityInfoId &&
-            idModule.lib.equalId(publicityInfo._id, selectedPublicityInfoId)
-          }
-          onClick={buildOnSelectPublicityInfo(publicityInfo._id)}
-          key={publicityInfo.sourceId}
-          publicityInfo={publicityInfo}
-        />
-      ))}
+      <h2 style={styles.title}>Décisions en attente ({sortedPublicityInfos.length})</h2>
+      <table style={styles.table}>
+        <tr>
+          <th style={styles.firstCell}>ID</th>
+          <th>Siège</th>
+          <th>NAC</th>
+          <th>Demande</th>
+          <th>Diffusion</th>
+        </tr>
+        {sortedPublicityInfos.map((publicityInfo) => (
+          <PublicityInfoRow
+            isSelected={
+              !!selectedPublicityInfoId &&
+              idModule.lib.equalId(publicityInfo._id, selectedPublicityInfoId)
+            }
+            onClick={buildOnSelectPublicityInfo(publicityInfo._id)}
+            key={publicityInfo.sourceId}
+            publicityInfo={publicityInfo}
+          />
+        ))}
+      </table>
     </div>
   );
 
@@ -77,5 +87,15 @@ function buildStyles() {
       height: heights.adminPanel,
       overflowY: "scroll",
     },
+    title: {
+      paddingLeft: "30px",
+    },
+    table: {
+      borderSpacing: 0,
+      textAlign: "left",
+    },
+    firstCell: {
+      paddingLeft: "30px"
+    }
   } as const;
 }

@@ -42,6 +42,7 @@ function buildStyles() {
   return {
     container: {
       display: "flex",
+      fontFamily: "sans-serif",
     },
   };
 }
