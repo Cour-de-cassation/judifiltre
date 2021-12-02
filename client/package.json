@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.21.4",
-    "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#790f6fa8f45259d50711b4a14f63393cdeda5f07",
+    "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#fb78762285234acae56d73b8be889f97f4eeb744",
     "pelta-design-system": "https://github.com/Cour-de-cassation/pelta-design-system#5f82ca7f83f4eda08f0a1e534d481543b51ffd6b",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
