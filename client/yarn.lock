@@ -7262,9 +7262,9 @@ jss@10.8.2, jss@^10.5.1:
     array-includes "^3.1.3"
     object.assign "^4.1.2"
 
-"judifiltre-core@https://github.com/Cour-de-cassation/judifiltre-core#790f6fa8f45259d50711b4a14f63393cdeda5f07":
+"judifiltre-core@https://github.com/Cour-de-cassation/judifiltre-core#fb78762285234acae56d73b8be889f97f4eeb744":
   version "0.0.1"
-  resolved "https://github.com/Cour-de-cassation/judifiltre-core#790f6fa8f45259d50711b4a14f63393cdeda5f07"
+  resolved "https://github.com/Cour-de-cassation/judifiltre-core#fb78762285234acae56d73b8be889f97f4eeb744"
   dependencies:
     mongodb "^4.1.3"
     typescript "^4.4.3"
