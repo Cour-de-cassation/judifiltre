@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { heights } from "pelta-design-system";
+import { customThemeType, heights, useCustomTheme } from "pelta-design-system";
 import {
   idModule,
   idType,
@@ -16,14 +16,17 @@ const WIDTH = 550;
 
 function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[] }) {
   const history = useHistory();
-  const styles = buildStyles();
+  const theme = useCustomTheme();
+  const styles = buildStyles(theme);
   const sortedPublicityInfos = props.publicityInfos.sort(comparePublicityInfos);
   const [selectedPublicityInfoId, setSelectedPublicityInfoId] = useState<
     idType | undefined
   >();
   return (
     <div style={styles.panel}>
-      <h2 style={styles.title}>Décisions en attente ({sortedPublicityInfos.length})</h2>
+      <h2 style={styles.title}>
+        Décisions en attente ({sortedPublicityInfos.length})
+      </h2>
       <table style={styles.table}>
         <tr>
           <th style={styles.firstCell}>ID</th>
@@ -80,7 +83,7 @@ function comparePublicityInfos(
   return 0;
 }
 
-function buildStyles() {
+function buildStyles(theme: customThemeType) {
   return {
     panel: {
       width: WIDTH,
@@ -88,14 +91,14 @@ function buildStyles() {
       overflowY: "scroll",
     },
     title: {
-      paddingLeft: "30px",
+      paddingLeft: `${theme.spacing * 4}px`,
     },
     table: {
       borderSpacing: 0,
       textAlign: "left",
     },
     firstCell: {
-      paddingLeft: "30px"
-    }
+      paddingLeft: `${theme.spacing * 4}px`,
+    },
   } as const;
 }
