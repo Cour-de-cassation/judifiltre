@@ -19,7 +19,7 @@
     "express": "^4.17.1",
     "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#fb78762285234acae56d73b8be889f97f4eeb744",
     "lodash": "^4.17.21",
-    "mongodb": "^4.1.3",
+    "mongodb": "^4.2.0",
     "typescript": "^4.4.4"
   },
   "devDependencies": {
