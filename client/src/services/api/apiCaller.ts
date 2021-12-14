@@ -6,6 +6,8 @@ const DEFAULT_HEADER = {
   "Cross-Origin-Embedder-Policy": "require-corp",
 };
 
+const API_URL = "http://localhost:8080/judifiltre/api/"
+
 type paramType = string | number;
 
 type paramsType = Record<string, paramType>;
@@ -20,7 +22,7 @@ const apiCaller = {
   }> {
     const response = await fetch(
       buildUrlWithParams(
-        `http://localhost:8080/judifiltre/api/${routeName}`,
+        API_URL + routeName,
         params
       ),
       {
@@ -49,7 +51,7 @@ const apiCaller = {
   }> {
     const response = await fetch(
       buildUrlWithParams(
-        `http://localhost:8080/judifiltre/api/${routeName}`,
+        API_URL + routeName,
         params
       ),
       {

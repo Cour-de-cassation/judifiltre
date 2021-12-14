@@ -19,7 +19,6 @@ function buildRoutes() {
   router.put("/publicityInfos/:publicityInfoId", async (request, response) => {
     const { publicityInfoId } = request.params;
     const { publicityAssessment } = request.body;
-    console.log(publicityAssessment);
     await publicityInfoService.updateAssessmentForPublicityInfo(
       idModule.lib.buildId(publicityInfoId),
       publicityAssessment

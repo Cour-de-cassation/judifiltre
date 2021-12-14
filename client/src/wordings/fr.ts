@@ -5,7 +5,7 @@ const fr = {
     decisionViewer: {
       buttons: {
         public: "Diffusable",
-        nonPublic: "Non diffusable",
+        notPublic: "Non diffusable",
         partiallyPublic: "Diffusable par extraits",
       },
     },

@@ -16,9 +16,9 @@ function DecisionViewer(props: { publicityInfoId: publicityInfoType["_id"] }) {
           <div>
             <ButtonWithIcon
               color="alert"
-              text={wordings.assessor.decisionViewer.buttons.nonPublic}
+              text={wordings.assessor.decisionViewer.buttons.notPublic}
               iconName="lock"
-              onClick={updatePublicityInfos("nonPublic")}
+              onClick={updatePublicityInfos("notPublic")}
             />
             <ButtonWithIcon
               color="warning"
