@@ -38,6 +38,36 @@ const apiCaller = {
       statusCode: response.status,
     };
   },
+  
+  async put<responseT>(
+    routeName: string,
+    body?: string,
+    params?: paramsType
+  ): Promise<{
+    data: responseT;
+    statusCode: number;
+  }> {
+    const response = await fetch(
+      buildUrlWithParams(
+        `http://localhost:8080/judifiltre/api/${routeName}`,
+        params
+      ),
+      {
+        cache: "default",
+        headers: DEFAULT_HEADER,
+        method: "put",
+        mode: "cors",
+        body
+      }
+    );
+
+    const data = await computeDataFromResponse(response);
+
+    return {
+      data,
+      statusCode: response.status,
+    };
+  },
 };
 
 function buildUrlWithParams(
