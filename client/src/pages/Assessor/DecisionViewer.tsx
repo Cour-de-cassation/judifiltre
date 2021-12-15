@@ -4,6 +4,7 @@ import { DecisionDataFetcher } from "./DecisionDataFetcher";
 import { ButtonWithIcon } from "pelta-design-system";
 import { wordings } from "../../wordings";
 import { apiCaller } from "../../services/api";
+import { DecisionPublicityButton } from "./DecisionPublicityButton";
 
 export { DecisionViewer };
 
@@ -14,24 +15,32 @@ function DecisionViewer(props: { publicityInfoId: publicityInfoType["_id"] }) {
         <div>
           {decision}
           <div>
-            <ButtonWithIcon
-              color="alert"
-              text={wordings.assessor.decisionViewer.buttons.notPublic}
-              iconName="lock"
-              onClick={updatePublicityInfos("notPublic")}
+          {[
+            {
+              color: "alert",
+              text:wordings.assessor.decisionViewer.buttons.notPublic,
+              iconName:"lock",
+              publicityAssessment: "notPublic"
+            },
+            {
+              color: "warning",
+              text:wordings.assessor.decisionViewer.buttons.partiallyPublic,
+              iconName:"puzzle",
+              publicityAssessment: "partiallyPublic"
+            },
+            {
+              color: "success",
+              text:wordings.assessor.decisionViewer.buttons.public,
+              iconName:"web",
+              publicityAssessment: "public"
+            }
+          ].map(buttonData => (
+            <DecisionPublicityButton 
+              {...buttonData}
+              publicityInfoId = {props.publicityInfoId}
+              key = {buttonData.publicityAssessment}
             />
-            <ButtonWithIcon
-              color="warning"
-              text={wordings.assessor.decisionViewer.buttons.partiallyPublic}
-              iconName="puzzle"
-              onClick={updatePublicityInfos("partiallyPublic")}
-            />
-            <ButtonWithIcon
-              color="success"
-              text={wordings.assessor.decisionViewer.buttons.public}
-              iconName="web"
-              onClick={updatePublicityInfos("public")}
-            />
+          ))}
           </div>
         </div>
       )}
