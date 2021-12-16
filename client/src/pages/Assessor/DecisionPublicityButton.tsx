@@ -1,25 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { publicityInfoType } from "judifiltre-core";
-import { ButtonWithIcon } from "pelta-design-system";
+import { ButtonWithIcon, iconNameType } from "pelta-design-system";
 import { apiCaller } from "../../services/api";
+import { wordings } from "../../wordings";
 
 export { DecisionPublicityButton };
 
-function DecisionPublicityButton(props: { publicityInfoId: publicityInfoType["_id"], publicityAssessment: string}) {
+type publicityAssessmentType = "public" | "notPublic" | "partiallyPublic";
+
+const buttonMapping = {
+  "public": {
+    iconName: "web",
+    color: "success"
+  },
+  "notPublic": {
+    iconName: "lock",
+    color: "alert"
+  },
+  "partiallyPublic": {
+    iconName: "puzzle",
+    color: "warning"
+  }
+} as const;
+
+
+function DecisionPublicityButton(props: { publicityInfoId: publicityInfoType["_id"], publicityAssessment: publicityAssessmentType}) {
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
+
+  const {iconName, color} = buttonMapping[props.publicityAssessment];
+
   return (
     <ButtonWithIcon
-      text=""
-      iconName="lock"
-      {...props}
+      iconName={iconName}
+      color={color}
+      text={wordings.assessor.decisionViewer.buttons[props.publicityAssessment]}
       onClick={updatePublicityInfos(props.publicityAssessment)}
+      isLoading={isUpdating}
     />
   );
-  function updatePublicityInfos(publicityAssessment: string) {
+  function updatePublicityInfos(publicityAssessment: publicityAssessmentType) {
     return async () => {
-      const fetchInfo = await apiCaller.put("publicityInfos/" + props.publicityInfoId, JSON.stringify({publicityAssessment}));
-      return {
-        statusCode: fetchInfo.statusCode,
-      };
+      setIsUpdating(true);
+      try{
+        const fetchInfo = await apiCaller.put("publicityInfos/" + props.publicityInfoId, JSON.stringify({publicityAssessment}));
+        setIsUpdating(false);
+        return {
+          statusCode: fetchInfo.statusCode,
+        };
+      }catch(e){
+        console.warn(e);
+        setIsUpdating(false);
+      }
     };
   }
 }

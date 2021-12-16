@@ -1,7 +1,6 @@
 import React from "react";
 import { publicityInfoType } from "judifiltre-core";
 import { DecisionDataFetcher } from "./DecisionDataFetcher";
-import { ButtonWithIcon } from "pelta-design-system";
 import { wordings } from "../../wordings";
 import { apiCaller } from "../../services/api";
 import { DecisionPublicityButton } from "./DecisionPublicityButton";
@@ -15,32 +14,18 @@ function DecisionViewer(props: { publicityInfoId: publicityInfoType["_id"] }) {
         <div>
           {decision}
           <div>
-          {[
-            {
-              color: "alert",
-              text:wordings.assessor.decisionViewer.buttons.notPublic,
-              iconName:"lock",
-              publicityAssessment: "notPublic"
-            },
-            {
-              color: "warning",
-              text:wordings.assessor.decisionViewer.buttons.partiallyPublic,
-              iconName:"puzzle",
-              publicityAssessment: "partiallyPublic"
-            },
-            {
-              color: "success",
-              text:wordings.assessor.decisionViewer.buttons.public,
-              iconName:"web",
-              publicityAssessment: "public"
-            }
-          ].map(buttonData => (
             <DecisionPublicityButton 
-              {...buttonData}
               publicityInfoId = {props.publicityInfoId}
-              key = {buttonData.publicityAssessment}
+              publicityAssessment = "public"
             />
-          ))}
+            <DecisionPublicityButton 
+              publicityInfoId = {props.publicityInfoId}
+              publicityAssessment = "notPublic"
+            />
+            <DecisionPublicityButton 
+              publicityInfoId = {props.publicityInfoId}
+              publicityAssessment = "partiallyPublic"
+            />
           </div>
         </div>
       )}
