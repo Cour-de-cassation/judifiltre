@@ -21,20 +21,20 @@ function Assessor() {
   const styles = buildStyles();
 
   return (
-    <div style={styles.container}>
-      <PublicityInfosDataFetcher>
-        {({ publicityInfos }) =>
-          publicityInfos.length > 0 ? (
+    <PublicityInfosDataFetcher>
+      {({ publicityInfos, refetch }) =>
+        publicityInfos.length > 0 ? (
+          <div style={styles.container}>
             <PublicityInfosPanel publicityInfos={publicityInfos} />
-          ) : (
-            <div>Pas de publicity Infos à traiter</div>
-          )
-        }
-      </PublicityInfosDataFetcher>
-      {!!publicityInfoId && (
-        <DecisionViewer publicityInfoId={publicityInfoId} />
-      )}
-    </div>
+            {!!publicityInfoId && (
+              <DecisionViewer publicityInfoId={publicityInfoId} refetchPublicityInfos={refetch} />
+            )}
+          </div>
+        ) : (
+          <div>Pas de publicity Infos à traiter</div>
+        )
+      }
+    </PublicityInfosDataFetcher>
   );
 }
 

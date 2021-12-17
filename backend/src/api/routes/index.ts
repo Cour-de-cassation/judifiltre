@@ -23,6 +23,7 @@ function buildRoutes() {
       idModule.lib.buildId(publicityInfoId),
       publicityAssessment
     );
+    response.sendStatus(200);
   });
 
   router.get("/decisions-to-release", async (request, response) => {

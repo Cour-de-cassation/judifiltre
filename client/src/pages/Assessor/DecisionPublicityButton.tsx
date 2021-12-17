@@ -24,7 +24,7 @@ const buttonMapping = {
 } as const;
 
 
-function DecisionPublicityButton(props: { publicityInfoId: publicityInfoType["_id"], publicityAssessment: publicityAssessmentType}) {
+function DecisionPublicityButton(props: { publicityInfoId: publicityInfoType["_id"], publicityAssessment: publicityAssessmentType; refetchPublicityInfos: () => void}) {
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
   const {iconName, color} = buttonMapping[props.publicityAssessment];
@@ -44,6 +44,7 @@ function DecisionPublicityButton(props: { publicityInfoId: publicityInfoType["_i
       try{
         const fetchInfo = await apiCaller.put("publicityInfos/" + props.publicityInfoId, JSON.stringify({publicityAssessment}));
         setIsUpdating(false);
+        props.refetchPublicityInfos();
         return {
           statusCode: fetchInfo.statusCode,
         };

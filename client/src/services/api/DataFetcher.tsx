@@ -6,7 +6,7 @@ export { DataFetcher };
 function DataFetcher<dataT>(props: {
   buildComponentWithData: (returnedData: dataT) => ReactElement;
   fetchInfo: { isLoaded: boolean; statusCode?: number; data?: dataT };
-  showLoadingOnRefetch?: boolean;
+  showLoadingOnRefetch?: boolean
 }) {
   const fetchedData = handleFetchedData(
     props.fetchInfo,
