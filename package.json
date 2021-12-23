@@ -6,8 +6,12 @@
   },
   "scripts": {
     "initDbDev": "cd backend && node dist/app/scripts/initDbDev.js",
-    "startClient": "cd client && yarn && yarn start",
+    "startClientDev": "cd client && yarn && yarn start",
     "startBackendDev": "cd backend && yarn && yarn startDev",
-    "startDbDev": "cd backend && yarn buildLocalDevDocker && yarn startLocalDevDocker"
+    "startDbDev": "cd backend && yarn buildLocalDevDocker && yarn startLocalDevDocker",
+    "startDev": "yarn startDbDev & yarn startBackendDev & startClientDev",
+    "buildBackend": "cd backend && yarn && yarn compile",
+    "buildClient": "cd client && yarn && yarn build",
+    "build": "yarn buildBackend && yarn buildClient"
   }
 }
