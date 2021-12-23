@@ -15,14 +15,16 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.2",
-    "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#fb78762285234acae56d73b8be889f97f4eeb744",
+    "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core",
     "lodash": "^4.17.21",
     "mongodb": "^4.2.2",
     "typescript": "^4.5.4"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/lodash": "^4.14.178",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
