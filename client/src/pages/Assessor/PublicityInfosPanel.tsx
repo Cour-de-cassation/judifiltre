@@ -14,14 +14,17 @@ export { PublicityInfosPanel };
 
 const WIDTH = 550;
 
-function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[] }) {
+function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[]; selectedPublicityInfoId: publicityInfoType['_id']}) {
   const history = useHistory();
   const theme = useCustomTheme();
   const styles = buildStyles(theme);
   const sortedPublicityInfos = props.publicityInfos.sort(comparePublicityInfos);
-  const [selectedPublicityInfoId, setSelectedPublicityInfoId] = useState<
+  const [selectedPublicityInfo, setSelectedPublicityInfo] = useState<
     idType | undefined
   >();
+  if(selectedPublicityInfo!==props.selectedPublicityInfoId){
+    setSelectedPublicityInfo(props.selectedPublicityInfoId);
+  }
   return (
     <div style={styles.panel}>
       <h2 style={styles.title}>
@@ -38,8 +41,8 @@ function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[] }) {
         {sortedPublicityInfos.map((publicityInfo) => (
           <PublicityInfoRow
             isSelected={
-              !!selectedPublicityInfoId &&
-              idModule.lib.equalId(publicityInfo._id, selectedPublicityInfoId)
+              !!selectedPublicityInfo &&
+              idModule.lib.equalId(publicityInfo._id, selectedPublicityInfo)
             }
             onClick={buildOnSelectPublicityInfo(publicityInfo._id)}
             key={publicityInfo.sourceId}
@@ -59,7 +62,7 @@ function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[] }) {
           publicityInfoId,
         })
       );
-      setSelectedPublicityInfoId(publicityInfoId);
+      setSelectedPublicityInfo(publicityInfoId);
     };
   }
 }

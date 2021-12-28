@@ -10,23 +10,20 @@ type assessorParamsType = {
 };
 
 function PublicityInfosDataFetcher(props: {
-  children: (fetched: { publicityInfos: publicityInfoType[]; refetch: () => void }) => ReactElement;
+  children: (fetched: { publicityInfos: publicityInfoType[]; refetch: () => void; selectedPublicityInfoId: publicityInfoType['_id'] }) => ReactElement;
 }) {
   const publicityInfoFetchInfo = useApi(buildFetchPublicityInfos(), {});
   const params = useParams<assessorParamsType>();
   const styles = buildStyles();
 
-  const publicityInfoId = params?.publicityInfoId
-  ? idModule.lib.buildId(params.publicityInfoId)
-  : undefined;
-
   return (
     <DataFetcher
       buildComponentWithData={(publicityInfos: publicityInfoType[]) =>
-        props.children({
-          publicityInfos,
-          refetch: publicityInfoFetchInfo.refetch
-        })
+          props.children({
+            publicityInfos,
+            refetch: publicityInfoFetchInfo.refetch,
+            selectedPublicityInfoId: publicityInfos[0] && publicityInfos[0]._id
+          })
       }
       fetchInfo={publicityInfoFetchInfo}
     />

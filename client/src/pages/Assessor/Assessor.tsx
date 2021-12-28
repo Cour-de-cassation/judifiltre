@@ -22,13 +22,11 @@ function Assessor() {
 
   return (
     <PublicityInfosDataFetcher>
-      {({ publicityInfos, refetch }) =>
+      {({ publicityInfos, refetch, selectedPublicityInfoId }) =>
         publicityInfos.length > 0 ? (
           <div style={styles.container}>
-            <PublicityInfosPanel publicityInfos={publicityInfos} />
-            {!!publicityInfoId && (
-              <DecisionViewer publicityInfoId={publicityInfoId} refetchPublicityInfos={refetch} />
-            )}
+            <PublicityInfosPanel publicityInfos={publicityInfos} selectedPublicityInfoId={publicityInfoId ?? selectedPublicityInfoId}/>
+            <DecisionViewer publicityInfoId={publicityInfoId ?? selectedPublicityInfoId} refetchPublicityInfos={refetch} />
           </div>
         ) : (
           <div>Pas de publicity Infos à traiter</div>

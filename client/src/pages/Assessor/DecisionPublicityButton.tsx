@@ -3,6 +3,8 @@ import { publicityInfoType } from "judifiltre-core";
 import { ButtonWithIcon, iconNameType } from "pelta-design-system";
 import { apiCaller } from "../../services/api";
 import { wordings } from "../../wordings";
+import { useHistory } from "react-router";
+import { routes } from "../routes";
 
 export { DecisionPublicityButton };
 
@@ -25,6 +27,7 @@ const buttonMapping = {
 
 
 function DecisionPublicityButton(props: { publicityInfoId: publicityInfoType["_id"], publicityAssessment: publicityAssessmentType; refetchPublicityInfos: () => void}) {
+  const history = useHistory();
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
   const {iconName, color} = buttonMapping[props.publicityAssessment];
@@ -44,6 +47,9 @@ function DecisionPublicityButton(props: { publicityInfoId: publicityInfoType["_i
       try{
         const fetchInfo = await apiCaller.put("publicityInfos/" + props.publicityInfoId, JSON.stringify({publicityAssessment}));
         setIsUpdating(false);
+        history.push(
+          routes.ASSESSOR_HOME.getPath()
+        );
         props.refetchPublicityInfos();
         return {
           statusCode: fetchInfo.statusCode,
