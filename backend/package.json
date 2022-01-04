@@ -6,7 +6,7 @@
     "compile": "tsc",
     "startDev": "ts-node-dev ./src/index.ts",
     "lint": "eslint . --ext .ts",
-    "start": "tsc && node ./dist/server.js",
+    "start": "tsc && node ./dist/index.js",
     "buildLocalDevDocker": "docker-compose -f docker-compose-dev.yml build",
     "startLocalDevDocker": "docker-compose -f docker-compose-dev.yml up"
   },
