@@ -11,26 +11,29 @@ export { DecisionPublicityButton };
 type publicityAssessmentType = "public" | "notPublic" | "partiallyPublic";
 
 const buttonMapping = {
-  "public": {
+  public: {
     iconName: "web",
-    color: "success"
+    color: "success",
   },
-  "notPublic": {
+  notPublic: {
     iconName: "lock",
-    color: "alert"
+    color: "alert",
   },
-  "partiallyPublic": {
+  partiallyPublic: {
     iconName: "puzzle",
-    color: "warning"
-  }
+    color: "warning",
+  },
 } as const;
 
-
-function DecisionPublicityButton(props: { publicityInfoId: publicityInfoType["_id"], publicityAssessment: publicityAssessmentType; refetchPublicityInfos: () => void}) {
+function DecisionPublicityButton(props: {
+  publicityInfoId: publicityInfoType["_id"];
+  publicityAssessment: publicityAssessmentType;
+  refetchPublicityInfos: () => void;
+}) {
   const history = useHistory();
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
-  const {iconName, color} = buttonMapping[props.publicityAssessment];
+  const { iconName, color } = buttonMapping[props.publicityAssessment];
 
   return (
     <ButtonWithIcon
@@ -44,15 +47,17 @@ function DecisionPublicityButton(props: { publicityInfoId: publicityInfoType["_i
   function updatePublicityInfos(publicityAssessment: publicityAssessmentType) {
     return async () => {
       setIsUpdating(true);
-      try{
-        await apiCaller.put("publicityInfos/" + props.publicityInfoId, JSON.stringify({publicityAssessment}));
-        history.push(
-          routes.ASSESSOR_HOME.getPath()
+      try {
+        const fetchInfo = await apiCaller.put(
+          "publicityInfos/" + props.publicityInfoId,
+          JSON.stringify({ publicityAssessment })
         );
+        setIsUpdating(false);
+        history.push(routes.ASSESSOR_HOME.getPath());
         props.refetchPublicityInfos();
-      }catch(e){
+      } catch (e) {
         console.warn(e);
-      }finally{
+      } finally {
         setIsUpdating(false);
       }
     };

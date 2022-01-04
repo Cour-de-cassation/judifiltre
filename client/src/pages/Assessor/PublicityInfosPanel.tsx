@@ -12,7 +12,10 @@ export { PublicityInfosPanel };
 
 const WIDTH = 550;
 
-function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[]; selectedPublicityInfoId: publicityInfoType['_id']}) {
+function PublicityInfosPanel(props: {
+  publicityInfos: publicityInfoType[];
+  selectedPublicityInfoId: publicityInfoType["_id"];
+}) {
   const history = useHistory();
   const theme = useCustomTheme();
   const styles = buildStyles(theme);
