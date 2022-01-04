@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { customThemeType, heights, useCustomTheme } from "pelta-design-system";
 import {
   idModule,
-  idType,
-  publicityInfoModule,
   publicityInfoType,
 } from "judifiltre-core";
 import { PublicityInfoRow } from "./PublicityInfoRow";
@@ -19,12 +17,6 @@ function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[]; selec
   const theme = useCustomTheme();
   const styles = buildStyles(theme);
   const sortedPublicityInfos = props.publicityInfos.sort(comparePublicityInfos);
-  const [selectedPublicityInfo, setSelectedPublicityInfo] = useState<
-    idType | undefined
-  >();
-  if(selectedPublicityInfo!==props.selectedPublicityInfoId){
-    setSelectedPublicityInfo(props.selectedPublicityInfoId);
-  }
   return (
     <div style={styles.panel}>
       <h2 style={styles.title}>
@@ -41,8 +33,8 @@ function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[]; selec
         {sortedPublicityInfos.map((publicityInfo) => (
           <PublicityInfoRow
             isSelected={
-              !!selectedPublicityInfo &&
-              idModule.lib.equalId(publicityInfo._id, selectedPublicityInfo)
+              !!props.selectedPublicityInfoId &&
+              idModule.lib.equalId(publicityInfo._id, props.selectedPublicityInfoId)
             }
             onClick={buildOnSelectPublicityInfo(publicityInfo._id)}
             key={publicityInfo.sourceId}
@@ -62,7 +54,6 @@ function PublicityInfosPanel(props: { publicityInfos: publicityInfoType[]; selec
           publicityInfoId,
         })
       );
-      setSelectedPublicityInfo(publicityInfoId);
     };
   }
 }
