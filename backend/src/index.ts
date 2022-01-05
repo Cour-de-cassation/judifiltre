@@ -11,4 +11,4 @@ app.use(express.json());
 
 buildApi(app);
 
-app.listen(8080);
+app.listen(process.env.API_PORT ? Number(process.env.API_PORT) : 8080);
