@@ -1,0 +1,56 @@
+#######################
+# Step 1: Base target #
+#######################
+FROM node:16-alpine3.14 as base
+ARG http_proxy
+ARG https_proxy
+ARG no_proxy
+ARG npm_registry
+ARG NPM_LATEST
+
+RUN apk add curl
+
+# use proxy & private npm registry
+RUN if [ ! -z "$http_proxy" ] ; then \
+  yarn config delete proxy; \
+  yarn config set proxy $http_proxy; \
+  yarn config set https-proxy $https_proxy; \
+  yarn config set no-proxy $no_proxy; \
+  fi ; \
+  [ -z "$npm_registry" ] || yarn config set registry=$npm_registry
+
+RUN [ -z "${NPM_LATEST}" ] || npm install npm@latest -g
+
+################################
+# Step 2: "label-backend"      #
+# yarn compile must have been  #
+# run first outside container  #
+# e.g in Github Actions CI     #
+################################
+FROM base as judifiltre-backend
+ARG NPM_FIX
+ARG NPM_VERBOSE
+ENV API_PORT=8080
+ENV NPM_CONFIG_LOGLEVEL debug
+
+WORKDIR /home/node/
+
+# Install git for sder package
+RUN apk add git
+
+# Copy context files
+COPY ./backend/package.json ./backend/yarn.lock ./
+
+# Install dependencies
+RUN yarn install --production
+
+ADD backend/dist/ dist/
+
+RUN chown node .
+
+USER node
+
+# Expose the listening port of your app
+EXPOSE ${API_PORT}
+
+CMD ["sh", "-c", "npm run start"]
