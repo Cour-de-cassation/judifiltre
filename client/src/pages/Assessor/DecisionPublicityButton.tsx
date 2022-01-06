@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { publicityInfoType } from "judifiltre-core";
-import { ButtonWithIcon } from "pelta-design-system";
+import { ButtonWithIcon, iconNameType } from "pelta-design-system";
 import { apiCaller } from "../../services/api";
 import { wordings } from "../../wordings";
 import { useHistory } from "react-router";
