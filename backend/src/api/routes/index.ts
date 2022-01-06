@@ -2,6 +2,8 @@ import express from "express";
 import { idModule } from "judifiltre-core";
 import { publicityInfoService } from "../../modules/publicityInfo";
 import { decisionService } from "../../modules/decision";
+import { connected } from "../../app/setup";
+
 import {
   parsePublicityInfos,
   publicityInfoCreationDtoType,
@@ -65,5 +67,12 @@ function buildRoutes() {
     }
     response.json(decision);
   });
+
+  router.get("/health", async (request, response) => {
+    return response.status(200).json({
+      "status": connected ? "disponible" : "indisponible"
+    });
+  });
+
   return router;
 }
