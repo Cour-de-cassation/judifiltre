@@ -6,7 +6,7 @@ const DEFAULT_HEADER = {
   "Cross-Origin-Embedder-Policy": "require-corp",
 };
 
-const API_URL = "http://localhost:8080/judifiltre/api/"
+const API_URL = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : "http://localhost:8080/judifiltre/api/";
 
 type paramType = string | number;
 

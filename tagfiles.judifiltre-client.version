@@ -1,10 +1,10 @@
 client/.eslintignore
 client/.eslintrc
+client/babel.config.json
 client/package.json
 client/public
 client/src
 client/tsconfig.json
-client/webpack.config.js
 client/yarn.lock
 Dockerfile.judifiltre-client
 nginx

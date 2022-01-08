@@ -127,6 +127,7 @@ jobs:
           fi
         env:
           APP_ID: judifiltre-client
+          REACT_APP_API_URL: /judifiltre/api/
       - name: 👤🐋 Build docker image -- client
         if: (matrix.node-version == '16.x') && (steps.client_check.outputs.status == 'build_needed')
         run: ./scripts/docker-build.sh
