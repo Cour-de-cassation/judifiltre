@@ -26,8 +26,7 @@ const decisionService = {
           sourceId
         );
         return (
-          jurinetDecision &&
-          jurinetLib.cleanText(jurinetUtils.xmlToJson(jurinetDecision.XML, {}))
+          jurinetDecision?.XML && jurinetLib.cleanText(jurinetDecision.XML)
         );
     }
   },
