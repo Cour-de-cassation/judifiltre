@@ -2,7 +2,7 @@ name: judifiltre CI
 
 on:
   push:
-    branches: [master, ops]
+    branches: [master]
   pull_request:
     branches: [master]
 
