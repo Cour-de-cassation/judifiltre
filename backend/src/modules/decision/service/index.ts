@@ -1,5 +1,5 @@
-import { jurinetUtils } from "sder";
-import { publicityInfoType } from "judifiltre-core";
+import { jurinetUtils, juricaUtils, jurinetLib } from "sder";
+import { jurinetDecisionType, publicityInfoType } from "judifiltre-core";
 import { juricaDecisionService } from "../../juricaDecision";
 import { jurinetDecisionService } from "../../jurinetDecision";
 
@@ -17,12 +17,18 @@ const decisionService = {
         const juricaDecision = await juricaDecisionService.findByDocumentId(
           sourceId
         );
-        return juricaDecision && juricaUtils.normalize(juricaDecision.XML);
+        return (
+          juricaDecision &&
+          juricaUtils.cleanHTML(juricaDecision.JDEC_HTML_SOURCE)
+        );
       case "jurinet":
         const jurinetDecision = await jurinetDecisionService.findByDocumentId(
           sourceId
         );
-        return jurinetDecision && jurinetUtils.normalize(jurinetDecision.XML);
+        return (
+          jurinetDecision &&
+          jurinetLib.cleanText(jurinetUtils.xmlToJson(jurinetDecision.XML, {}))
+        );
     }
   },
 };

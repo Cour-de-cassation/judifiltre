@@ -20,7 +20,7 @@
     "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#fb78762285234acae56d73b8be889f97f4eeb744",
     "lodash": "^4.17.21",
     "mongodb": "^4.1.3",
-    "sder": "https://github.com/Cour-de-cassation/sder#587757f45b764ec36e498b2886f51c4e0119381c",
+    "sder": "https://github.com/Cour-de-cassation/sder#6dd6e858cdd2486b7a9b27a19df2a85f9cabd244",
     "typescript": "^4.4.4"
   },
   "devDependencies": {
