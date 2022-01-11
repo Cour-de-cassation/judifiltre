@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Key } from "react";
 import { customThemeType, heights, useCustomTheme } from "pelta-design-system";
 import { publicityInfoType } from "judifiltre-core";
 import { DecisionDataFetcher } from "./DecisionDataFetcher";
@@ -26,8 +26,8 @@ function DecisionViewer(props: {
               <div style={styles.documentContainer}>
                 <div style={styles.documentTextContainer}>
                   <table style={styles.documentTextTable}>
-                    {lineSplitter.splitTextAccordingToNewLine(decision).map((line) => (
-                      <tr key={decision}>
+                    {lineSplitter.splitTextAccordingToNewLine(decision).map((line, index) => (
+                      <tr key={index}>
                         <td style={styles.lineCell}>
                           {line}
                         </td>
