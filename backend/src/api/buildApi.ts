@@ -8,7 +8,7 @@ export { buildApi };
 async function buildApi(app: Express) {
   const routes = buildRoutes();
 
-  app.use("/judifiltre/api", routes);
+  app.use(process.env.ROOT_PATH ? `/${process.env.ROOT_PATH}` : "/judifiltre/api", routes);
 
   await setupMongo();
 }

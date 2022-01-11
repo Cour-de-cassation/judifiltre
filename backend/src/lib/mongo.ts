@@ -7,9 +7,9 @@ export type { mongoCollectionType };
 type mongoCollectionType<T> = Collection<T>;
 
 const dbConfigs = [
-  { dbName: "jurinet", port: 27018 },
-  { dbName: "jurica", port: 27019 },
-  { dbName: "judifiltredb", port: 27017 },
+  { dbName: process.env.JURINET_DBNAME || "jurinet", url: process.env.JURINET_URL || "mongodb://localhost:27018" },
+  { dbName: process.env.JURICA_DBNAME || "jurica", url: process.env.JURICA_URL || "mongodb://localhost:27018" },
+  { dbName: process.env.JUDIFILTRE_DBNAME || "judifiltredb", url: process.env.JUDIFILTRE_URL || "mongodb://localhost:27017" },
 ] as const;
 
 const mongo = {} as Record<
