@@ -8,7 +8,7 @@ import { lineSplitter } from "../../services/lineSplitter";
 export { DecisionViewer };
 
 const LINE_MIN_HEIGHT = 10;
-const TEXT_CONTENT_WIDTH = '900px';
+const TEXT_CONTENT_WIDTH = "900px";
 
 function DecisionViewer(props: {
   publicityInfoId: publicityInfoType["_id"];
@@ -20,29 +20,22 @@ function DecisionViewer(props: {
   return (
     <DecisionDataFetcher params={{ publicityInfoId: props.publicityInfoId }}>
       {({ decision }) => (
-        <div>
-          <div style={styles.container}>
-              <div style={styles.documentHeaderContainer}></div>
-              <div style={styles.documentContainer}>
-                <div style={styles.documentTextContainer}>
-                  <table style={styles.documentTextTable}>
-                    {lineSplitter.splitTextAccordingToNewLine(decision).map((line, index) => (
-                      <tr key={index}>
-                        <td style={styles.lineCell}>
-                          {line}
-                        </td>
-                      </tr>
-                    ))}
-                  </table>
-                </div>
-              </div>
+        <div style={styles.container}>
+          <div style={styles.documentHeaderContainer}></div>
+          <div style={styles.documentContainer}>
+            <div style={styles.documentTextContainer}>
+              <table style={styles.documentTextTable}>
+                {lineSplitter
+                  .splitTextAccordingToNewLine(decision)
+                  .map((line, index) => (
+                    <tr key={index}>
+                      <td style={styles.lineCell}>{line}</td>
+                    </tr>
+                  ))}
+              </table>
+            </div>
           </div>
-          <div>
-            <DecisionPublicityButton
-              publicityInfoId={props.publicityInfoId}
-              publicityAssessment="public"
-              refetchPublicityInfos={props.refetchPublicityInfos}
-            />
+          <div style={styles.buttonContainer}>
             <DecisionPublicityButton
               publicityInfoId={props.publicityInfoId}
               publicityAssessment="notPublic"
@@ -51,6 +44,11 @@ function DecisionViewer(props: {
             <DecisionPublicityButton
               publicityInfoId={props.publicityInfoId}
               publicityAssessment="partiallyPublic"
+              refetchPublicityInfos={props.refetchPublicityInfos}
+            />
+            <DecisionPublicityButton
+              publicityInfoId={props.publicityInfoId}
+              publicityAssessment="public"
               refetchPublicityInfos={props.refetchPublicityInfos}
             />
           </div>
@@ -63,20 +61,20 @@ function DecisionViewer(props: {
 function buildStyles(theme: customThemeType) {
   return {
     container: {
-      display: 'flex',
-      flexDirection: 'column',
+      display: "flex",
+      flexDirection: "column",
+      padding: theme.spacing * 2,
     },
-    documentHeaderContainer: {
-      height: '100%',
-    },
+    documentHeaderContainer: {},
     documentContainer: {
-      width: '100vw',
+      width: "100vw",
       maxWidth: TEXT_CONTENT_WIDTH,
-      margin: '0 auto',
+      flex: 1,
+      margin: "0 auto",
     },
     documentTextContainer: {
-      height: '100%',
-      overflowY: 'auto',
+      height: "100%",
+      overflowY: "auto",
       backgroundColor: theme.colors.document,
       borderRadius: theme.shape.borderRadius.m,
     },
@@ -84,14 +82,21 @@ function buildStyles(theme: customThemeType) {
       padding: theme.spacing * 2,
     },
     documentFooterContainer: {
-      display: 'flex',
-      height: '100%',
+      display: "flex",
+      height: "100%",
       paddingRight: theme.spacing * 2,
-      justifyContent: 'flex-end',
-      alignItems: 'center',
+      justifyContent: "flex-end",
+      alignItems: "center",
     },
     lineCell: {
       height: LINE_MIN_HEIGHT,
+    },
+    buttonContainer: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      columnGap: theme.spacing,
+      padding: theme.spacing * 2,
     },
   } as const;
 }

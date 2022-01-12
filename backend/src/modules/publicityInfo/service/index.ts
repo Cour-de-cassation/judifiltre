@@ -20,8 +20,8 @@ const publicityInfoService = {
     const publicityInfoRepository = buildPublicityInfoRepository();
 
     const frozenPublicityInfos = await publicityInfoRepository.findAll();
-    let partiallyReleasableDecisions = [];
-    let releasableDecisions = [];
+    const partiallyReleasableDecisions = [];
+    const releasableDecisions = [];
     for (const publicityInfo of frozenPublicityInfos) {
       switch (publicityInfo.publicity.assessment?.kind) {
         case "public":
