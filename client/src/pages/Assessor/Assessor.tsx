@@ -4,14 +4,7 @@ import { idModule } from "judifiltre-core";
 import { DecisionViewer } from "./DecisionViewer";
 import { PublicityInfosDataFetcher } from "./PublicityInfosDataFetcher";
 import { PublicityInfosPanel } from "./PublicityInfosPanel";
-import {
-  Header,
-  Text,
-  MenuBar,
-  useCustomTheme,
-  heights,
-} from "pelta-design-system";
-import { Button } from "pelta-design-system/dist/components/custom";
+import { Header, MenuBar, useCustomTheme, heights } from "pelta-design-system";
 
 export { Assessor };
 

@@ -96,7 +96,7 @@ function buildStyles(theme: customThemeType) {
       flexDirection: "row",
       justifyContent: "flex-end",
       columnGap: theme.spacing,
-      padding: theme.spacing * 2,
+      paddingTop: theme.spacing * 2,
     },
   } as const;
 }

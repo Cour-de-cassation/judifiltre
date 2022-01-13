@@ -26,7 +26,10 @@ const decisionService = {
           sourceId
         );
         return (
-          jurinetDecision?.XML && jurinetLib.cleanText(jurinetDecision.XML)
+          jurinetDecision?.XML &&
+          jurinetUtils.xmlToJson(jurinetLib.cleanText(jurinetDecision.XML), {})[
+            "TEXTE_ARRET"
+          ]
         );
     }
   },
