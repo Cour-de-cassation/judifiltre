@@ -12,7 +12,7 @@ You must have installed on your computer the following :
 
 Run in three different terminals the following commands:
 
-- `startClient`
+- `startClientDev`
 - `startBackendDev`
 - `startDbDev`
 
