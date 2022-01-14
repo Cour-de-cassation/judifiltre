@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "initDbDev": "cd backend && node dist/app/scripts/initDbDev.js",
+    "initDb": "cd backend && node dist/app/scripts/initDb.js",
     "startClientDev": "cd client && yarn && yarn start",
     "startBackendDev": "cd backend && yarn && yarn startDev",
     "startDbDev": "cd backend && yarn buildLocalDevDocker && yarn startLocalDevDocker",
@@ -11,8 +12,5 @@
     "buildBackend": "cd backend && yarn && yarn compile",
     "buildClient": "cd client && yarn && yarn build",
     "build": "yarn buildBackend && yarn buildClient"
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.14.178"
   }
 }
