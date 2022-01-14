@@ -215,19 +215,17 @@ jobs:
           API_PORT: 8080
           APP_KEYWORD: "\"disponible\""
           GIT_BRANCH: ${{ steps.extract_branch.outputs.branch }}
-          ## to fulfill after discussion
-          ## for first deployments, a fake local namespace mongodb will be deployed
-          MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
-          # JURICA_URL: ${{ secrets.JURICA_URL }}
-          # JURICA_DBNAME: ${{ secrets.JURICA_DBNAME }}
-          # JURINET_URL: ${{ secrets.JURINET_URL }}
-          # JURINET_DBNAME: ${{ secrets.JURINET_DBNAME }}
-          # JUDIFILTRE_URL: ${{ secrets.JUDIFILTRE_URL }}
-          # JUDIFILTRE_DBNAME: ${{ secrets.JUDIFILTRE_DBNAME }}
+          # MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+          JURICA_URL: ${{ secrets.JURICA_URL }}
+          JURICA_DBNAME: ${{ secrets.JURICA_DBNAME }}
+          JURINET_URL: ${{ secrets.JURINET_URL }}
+          JURINET_DBNAME: ${{ secrets.JURINET_DBNAME }}
+          JUDIFILTRE_URL: ${{ secrets.JUDIFILTRE_URL }}
+          JUDIFILTRE_DBNAME: ${{ secrets.JUDIFILTRE_DBNAME }}
           ROOT_PATH: judifiltre/api
           VERSION: ${{ steps.backend_version.outputs.version }}
       - name: 🔙 initDb for test -- backend
-        run: kubectl -n ${KUBE_NAMESPACE} exec $(kubectl -n ${KUBE_NAMESPACE} get pods | grep judifiltre-backend | awk '{print $1}')  --  node dist/app/scripts/initDbDev.js
+        run: kubectl -n ${KUBE_NAMESPACE} exec $(kubectl -n ${KUBE_NAMESPACE} get pods | grep judifiltre-backend | awk '{print $1}')  --  node dist/app/scripts/initDb.js
       - name: 🔙🚀 Update remote app ☸️ -- backend
         run: |
           ./scripts/update_app.sh || (echo K8S LOGS && cat $(ls -tr k8s*log | tail -1) && exit 1)
