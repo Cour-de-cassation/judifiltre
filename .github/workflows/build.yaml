@@ -88,7 +88,7 @@ jobs:
           VERSION: ${{ steps.backend_version.outputs.version }}
       - name: 🔙 initDb for test -- backend
         if: (matrix.node-version == '16.x') && (steps.backend_check.outputs.status == 'build_needed')
-        run: kubectl -n ${KUBE_NAMESPACE} exec -it $(kubectl -n ${KUBE_NAMESPACE} get pods | grep judifiltre-backend | awk '{print $1}')  --  node dist/app/scripts/initDbDev.js
+        run: kubectl -n ${KUBE_NAMESPACE} exec $(kubectl -n ${KUBE_NAMESPACE} get pods | grep judifiltre-backend | awk '{print $1}')  --  node dist/app/scripts/initDbDev.js
       - name: 🔙✅ Execute minimal tests -- backend
         if: (matrix.node-version == '16.x') && (steps.backend_check.outputs.status == 'build_needed')
         run: |
