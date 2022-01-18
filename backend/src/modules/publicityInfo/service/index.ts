@@ -51,6 +51,30 @@ const publicityInfoService = {
     return publicityInfoRepository.findById(_id);
   },
 
+  async deleteMany(
+    publicityInfosDto: Array<{
+      sourceDb: publicityInfoType["sourceDb"];
+      sourceId: publicityInfoType["sourceId"];
+    }>
+  ) {
+    const publicityInfoRepository = buildPublicityInfoRepository();
+
+    await Promise.all(
+      publicityInfosDto.map(async (publicityInfoDto) => {
+        const hasBeenDeleted =
+          await publicityInfoRepository.deleteBySourceIdAndSourceDb(
+            publicityInfoDto
+          );
+        if (!hasBeenDeleted) {
+          console.warn(
+            `Could not delete publicityInfo: {sourceId: ${publicityInfoDto.sourceId}, sourceDb: ${publicityInfoDto.sourceDb}}`
+          );
+        }
+      })
+    );
+    return;
+  },
+
   async updateAssessmentForPublicityInfo(
     publicityInfoId: publicityInfoType["_id"],
     publicityAssessment: publicityInfoType["publicity"]["assessment"]
