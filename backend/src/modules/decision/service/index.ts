@@ -1,5 +1,5 @@
 import { jurinetUtils, juricaUtils, jurinetLib } from "sder";
-import { jurinetDecisionType, publicityInfoType } from "judifiltre-core";
+import { publicityInfoType } from "judifiltre-core";
 import { juricaDecisionService } from "../../juricaDecision";
 import { jurinetDecisionService } from "../../jurinetDecision";
 
