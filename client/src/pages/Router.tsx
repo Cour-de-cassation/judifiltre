@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { Assessor } from "./Assessor";
+import { Login } from "./Login";
 import { routes } from "./routes";
 
 export { Router };
@@ -14,6 +15,9 @@ function Router() {
         </Route>
         <Route path={routes.ASSESSOR_HOME.getPath()}>
           <Assessor />
+        </Route>
+        <Route path={routes.LOGIN.getPath()}>
+          <Login />
         </Route>
         <Route
           path={routes.DEFAULT.getPath()}

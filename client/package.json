@@ -5,8 +5,8 @@
   "homepage": "/judifiltre",
   "dependencies": {
     "axios": "^0.24.0",
-    "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#fb78762285234acae56d73b8be889f97f4eeb744",
-    "pelta-design-system": "https://github.com/Cour-de-cassation/pelta-design-system#5f82ca7f83f4eda08f0a1e534d481543b51ffd6b",
+    "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#90a01436f213f779953d2dc63a1f5daf20eb226e",
+    "pelta-design-system": "https://github.com/Cour-de-cassation/pelta-design-system#0b998eb3d14d34cf8fe83c0c48f598401a48f23e",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.3.0",
@@ -19,6 +19,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/axios": "^0.14.0",
     "@types/jest": "^27.4.0",
+    "@types/lodash": "^4.14.178",
     "@types/node": "=16.11.19",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",

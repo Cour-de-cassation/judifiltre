@@ -1,10 +1,8 @@
-name: judifiltre CI
+name: 🐋☸️ Build (PR)
 
 on:
-  push:
-    branches: [master]
   pull_request:
-    branches: [master]
+    branches: [dev, master]
 
 jobs:
   build:
@@ -24,11 +22,9 @@ jobs:
       KUBE_ZONE: local
       ROOT_PATH: judifiltre* # specific to backend or client
       START_TIMEOUT: 240
-
     strategy:
       matrix:
         node-version: [14.x, 16.x]
-
     steps:
       - uses: actions/checkout@v2
       - name: Extract branch name
@@ -92,7 +88,7 @@ jobs:
           VERSION: ${{ steps.backend_version.outputs.version }}
       - name: 🔙 initDb for test -- backend
         if: (matrix.node-version == '16.x') && (steps.backend_check.outputs.status == 'build_needed')
-        run: kubectl -n ${KUBE_NAMESPACE} exec -it $(kubectl -n ${KUBE_NAMESPACE} get pods | grep judifiltre-backend | awk '{print $1}')  --  node dist/app/scripts/initDbDev.js
+        run: kubectl -n ${KUBE_NAMESPACE} exec $(kubectl -n ${KUBE_NAMESPACE} get pods | grep judifiltre-backend | awk '{print $1}')  --  node dist/app/scripts/initDbDev.js
       - name: 🔙✅ Execute minimal tests -- backend
         if: (matrix.node-version == '16.x') && (steps.backend_check.outputs.status == 'build_needed')
         run: |
@@ -106,20 +102,6 @@ jobs:
           GIT_BRANCH: ${{ steps.extract_branch.outputs.branch }}
           GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
           ROOT_PATH: judifiltre/api
-      - name: 🔙🚀 Push docker image -- backend
-        if: (matrix.node-version == '16.x') && (steps.backend_check.outputs.status == 'build_needed') && (github.event_name == 'push')
-        run: |
-          echo "${DOCKER_TOKEN}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-          DOCKER_IMAGE=${DOCKER_USERNAME}/${APP_ID}:${VERSION}
-          docker push ${DOCKER_IMAGE};
-          docker tag ${DOCKER_IMAGE} ${DOCKER_USERNAME}/${APP_ID}:$(echo ${VERSION} | sed 's/-.*//')
-          docker push ${DOCKER_USERNAME}/${APP_ID}:$(echo ${VERSION} | sed 's/-.*//')
-          docker tag ${DOCKER_IMAGE} ${DOCKER_USERNAME}/${APP_ID}:latest
-          docker push ${DOCKER_USERNAME}/${APP_ID}:latest
-        env:
-          APP_ID: judifiltre-backend
-          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-          VERSION: ${{ steps.backend_version.outputs.version }}
       - name: 👤  Build static app -- client
         if: (matrix.node-version == '16.x') && (steps.client_check.outputs.status == 'build_needed')
         run: |
@@ -160,17 +142,3 @@ jobs:
           GIT_BRANCH: ${{ steps.extract_branch.outputs.branch }}
           GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
           ROOT_PATH: judifiltre
-      - name: 👤🚀 Push docker image -- client
-        if: (matrix.node-version == '16.x') && (steps.client_check.outputs.status == 'build_needed') && (github.event_name == 'push')
-        run: |
-          echo "${DOCKER_TOKEN}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-          DOCKER_IMAGE=${DOCKER_USERNAME}/${APP_ID}:${VERSION}
-          docker push ${DOCKER_IMAGE};
-          docker tag ${DOCKER_IMAGE} ${DOCKER_USERNAME}/${APP_ID}:$(echo ${VERSION} | sed 's/-.*//')
-          docker push ${DOCKER_USERNAME}/${APP_ID}:$(echo ${VERSION} | sed 's/-.*//')
-          docker tag ${DOCKER_IMAGE} ${DOCKER_USERNAME}/${APP_ID}:latest
-          docker push ${DOCKER_USERNAME}/${APP_ID}:latest
-        env:
-          APP_ID: judifiltre-client
-          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-          VERSION: ${{ steps.client_version.outputs.version }}
