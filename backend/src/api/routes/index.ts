@@ -40,8 +40,7 @@ function buildRoutes() {
     async (request, response) => {
       const publicityInfosDto = request.body;
       await publicityInfoService.deleteMany(publicityInfosDto);
-      response.sendStatus(204);
-      response.send(`publicityInfos deleted`);
+      response.status(204).send(`publicityInfos deleted`);
     }
   );
 
@@ -50,8 +49,9 @@ function buildRoutes() {
     async (request, response) => {
       const parsedPublicityInfos = parsePublicityInfos(request.body);
       await publicityInfoService.insertMany(parsedPublicityInfos);
-      response.sendStatus(201);
-      response.send(`${parsedPublicityInfos.length} publicityInfos created`);
+      response
+        .status(201)
+        .send(`${parsedPublicityInfos.length} publicityInfos created`);
     }
   );
 
