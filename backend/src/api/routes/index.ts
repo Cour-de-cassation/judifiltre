@@ -4,10 +4,11 @@ import { publicityInfoService } from "../../modules/publicityInfo";
 import { decisionService } from "../../modules/decision";
 import { connected } from "../../app/setup";
 
+import { parsePublicityInfos } from "./lib/parsePublicityInfos";
 import {
-  parsePublicityInfos,
+  publicityInfoDeletionDtoType,
   publicityInfoCreationDtoType,
-} from "./lib/parsePublicityInfos";
+} from "./types";
 
 export { buildRoutes };
 
@@ -34,13 +35,23 @@ function buildRoutes() {
     response.json(publicityInfos);
   });
 
+  router.delete<"publicityInfos", any, Array<publicityInfoDeletionDtoType>>(
+    "/publicityInfos",
+    async (request, response) => {
+      const publicityInfosDto = request.body;
+      await publicityInfoService.deleteMany(publicityInfosDto);
+      response.status(204).send(`publicityInfos deleted`);
+    }
+  );
+
   router.post<"publicityInfos", any, Array<publicityInfoCreationDtoType>>(
     "/publicityInfos",
     async (request, response) => {
       const parsedPublicityInfos = parsePublicityInfos(request.body);
       await publicityInfoService.insertMany(parsedPublicityInfos);
-      response.sendStatus(201);
-      response.send(`${parsedPublicityInfos.length} publicityInfos created`);
+      response
+        .status(201)
+        .send(`${parsedPublicityInfos.length} publicityInfos created`);
     }
   );
 
@@ -70,7 +81,7 @@ function buildRoutes() {
 
   router.get("/health", async (request, response) => {
     return response.status(200).json({
-      "status": connected ? "disponible" : "indisponible"
+      status: connected ? "disponible" : "indisponible",
     });
   });
 

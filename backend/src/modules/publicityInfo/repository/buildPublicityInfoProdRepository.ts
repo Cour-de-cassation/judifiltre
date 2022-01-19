@@ -14,6 +14,10 @@ const buildPublicityInfoProdRepository = buildRepositoryBuilder<
     findAllFrozen: async () => {
       return collection.find({ "publicity.isFrozen": true }).toArray();
     },
+    deleteBySourceIdAndSourceDb: async ({ sourceId, sourceDb }) => {
+      const result = await collection.deleteOne({ sourceDb, sourceId });
+      return result.deletedCount === 1;
+    },
     updateAssessmentForOne: async (_id, assessment) => {
       await collection.updateOne(
         { _id },

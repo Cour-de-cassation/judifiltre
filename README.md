@@ -21,3 +21,7 @@ Run in three different terminals the following commands:
 Run the following command, once the project is already running :
 
 - `initDbDev`
+
+# Production doc
+
+[Can be found here](https://github.com/Cour-de-cassation/Knowledge-base-ops/blob/master/plateforme-interne/integration-exploitation/apps-k8s/judifiltre.md)

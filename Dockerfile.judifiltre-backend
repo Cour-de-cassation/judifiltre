@@ -22,7 +22,7 @@ RUN if [ ! -z "$http_proxy" ] ; then \
 RUN [ -z "${NPM_LATEST}" ] || npm install npm@latest -g
 
 ################################
-# Step 2: "label-backend"      #
+# Step 2: "judifiltre-backend" #
 # yarn compile must have been  #
 # run first outside container  #
 # e.g in Github Actions CI     #

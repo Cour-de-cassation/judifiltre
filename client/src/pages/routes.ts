@@ -14,5 +14,8 @@ const routes = {
         params?.publicityInfoId || ":publicityInfoId"
       }`,
   },
+  LOGIN: {
+    getPath: () => `/${ROUTE_PREFIX}/login`,
+  },
   DEFAULT: { getPath: () => `/${ROUTE_PREFIX}` },
 };

@@ -1,17 +1,7 @@
 import { idModule, publicityInfoType } from "judifiltre-core";
-
-export type { publicityInfoCreationDtoType };
+import { publicityInfoCreationDtoType } from "../types";
 
 export { parsePublicityInfos };
-
-type publicityInfoCreationDtoType = {
-  sourceId: publicityInfoType["sourceId"];
-  sourceDb: publicityInfoType["sourceDb"];
-  decisionDate: string;
-  jurisdictionName: string;
-  fieldCode: string;
-  publicityClerkRequest: publicityInfoType["publicity"]["clerkRequest"];
-};
 
 function parsePublicityInfos(
   publicityInfosDto: Array<publicityInfoCreationDtoType>
