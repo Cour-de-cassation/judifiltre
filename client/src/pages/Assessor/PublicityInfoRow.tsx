@@ -1,6 +1,6 @@
 import React from "react";
 import { publicityInfoType } from "judifiltre-core";
-import { customThemeType, useCustomTheme } from "pelta-design-system";
+import { customThemeType, Text, useCustomTheme } from "pelta-design-system";
 
 export { PublicityInfoRow };
 
@@ -20,21 +20,23 @@ function PublicityInfoRow(props: {
       <td
         style={props.isSelected ? styles.selectedFirstCells : styles.firstCells}
       >
-        {props.publicityInfo.sourceId}
+        <Text>{props.publicityInfo.sourceId}</Text>
       </td>
       <td style={props.isSelected ? styles.selectedCells : styles.cells}>
-        {props.publicityInfo.jurisdiction}
+        <Text>{props.publicityInfo.jurisdiction}</Text>
       </td>
       <td style={props.isSelected ? styles.selectedCells : styles.cells}>
-        {props.publicityInfo.fieldCode}
+        <Text>{props.publicityInfo.fieldCode}</Text>
       </td>
       <td style={props.isSelected ? styles.selectedCells : styles.cells}>
-        {props.publicityInfo.publicity.clerkRequest === "unspecified"
-          ? "-"
-          : props.publicityInfo.publicity.clerkRequest}
+        <Text>
+          {props.publicityInfo.publicity.clerkRequest === "unspecified"
+            ? "-"
+            : props.publicityInfo.publicity.clerkRequest}
+        </Text>
       </td>
       <td style={props.isSelected ? styles.selectedLastCells : undefined}>
-        {props.publicityInfo.publicity.assessment}
+        <Text>{props.publicityInfo.publicity.assessment}</Text>
       </td>
     </tr>
   );
