@@ -183,7 +183,7 @@ jobs:
       APP_KEYWORD: specific # to backend or client
       DOCKER_USERNAME: opendatajustice
       KUBE_NAMESPACE: judilibre-prive-judifiltre
-      KUBE_SERVICES_FORCE_UPDATE: deployment #temporary force re-deployment if config changed
+      # KUBE_SERVICES_FORCE_UPDATE: deployment #temporary force re-deployment if config changed
       KUBE_TYPE: k3s
       KUBE_ZONE: prive
       ROOT_PATH: judifiltre* # specific to backend or client
