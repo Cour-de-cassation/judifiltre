@@ -22,7 +22,7 @@
     "mongodb": "=4.1.4",
     "needle": "^3.0.0",
     "sder": "https://github.com/Cour-de-cassation/sder#6dd6e858cdd2486b7a9b27a19df2a85f9cabd244",
-    "typescript": "^4.4.4"
+    "typescript": "^4.5.4"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
