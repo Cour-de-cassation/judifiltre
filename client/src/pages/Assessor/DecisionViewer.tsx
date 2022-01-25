@@ -1,5 +1,5 @@
-import React, { Key } from "react";
-import { customThemeType, heights, useCustomTheme } from "pelta-design-system";
+import React from "react";
+import { customThemeType, useCustomTheme } from "pelta-design-system";
 import { publicityInfoType } from "judifiltre-core";
 import { DecisionDataFetcher } from "./DecisionDataFetcher";
 import { DecisionPublicityButton } from "./DecisionPublicityButton";

@@ -4,7 +4,13 @@ import { idModule } from "judifiltre-core";
 import { DecisionViewer } from "./DecisionViewer";
 import { PublicityInfosDataFetcher } from "./PublicityInfosDataFetcher";
 import { PublicityInfosPanel } from "./PublicityInfosPanel";
-import { Header, MenuBar, useCustomTheme, heights } from "pelta-design-system";
+import {
+  Header,
+  MenuBar,
+  useCustomTheme,
+  heights,
+  Text,
+} from "pelta-design-system";
 
 export { Assessor };
 
@@ -49,7 +55,7 @@ function Assessor() {
               />
             </div>
           ) : (
-            <div>Pas de publicity Infos à traiter</div>
+            <Text>Pas de publicity Infos à traiter</Text>
           )
         }
       </PublicityInfosDataFetcher>
@@ -60,7 +66,6 @@ function Assessor() {
     return {
       container: {
         display: "flex",
-        fontFamily: "sans-serif",
       },
       header: {
         height: heights.header,
