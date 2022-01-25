@@ -1,9 +1,11 @@
 import React from "react";
-import { customThemeType, heights, useCustomTheme } from "pelta-design-system";
 import {
-  idModule,
-  publicityInfoType,
-} from "judifiltre-core";
+  customThemeType,
+  heights,
+  Text,
+  useCustomTheme,
+} from "pelta-design-system";
+import { idModule, publicityInfoType } from "judifiltre-core";
 import { PublicityInfoRow } from "./PublicityInfoRow";
 import { useHistory } from "react-router";
 import { routes } from "../routes";
@@ -27,17 +29,30 @@ function PublicityInfosPanel(props: {
       </h2>
       <table style={styles.table}>
         <tr>
-          <th style={styles.firstCell}>ID</th>
-          <th>Siège</th>
-          <th>NAC</th>
-          <th>Demande</th>
-          <th>Diffusion</th>
+          <th style={styles.firstCell}>
+            <Text>ID</Text>
+          </th>
+          <th>
+            <Text>Siège</Text>
+          </th>
+          <th>
+            <Text>NAC</Text>
+          </th>
+          <th>
+            <Text>Demande</Text>
+          </th>
+          <th>
+            <Text>Diffusion</Text>
+          </th>
         </tr>
         {sortedPublicityInfos.map((publicityInfo) => (
           <PublicityInfoRow
             isSelected={
               !!props.selectedPublicityInfoId &&
-              idModule.lib.equalId(publicityInfo._id, props.selectedPublicityInfoId)
+              idModule.lib.equalId(
+                publicityInfo._id,
+                props.selectedPublicityInfoId
+              )
             }
             onClick={buildOnSelectPublicityInfo(publicityInfo._id)}
             key={publicityInfo.sourceId}
