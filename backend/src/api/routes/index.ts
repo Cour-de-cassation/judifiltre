@@ -1,5 +1,5 @@
 import express from "express";
-import { idModule, publicityInfoType } from "judifiltre-core";
+import { idModule, publicityInfoType, userType } from "judifiltre-core";
 import { publicityInfoService } from "../../modules/publicityInfo";
 import { decisionService } from "../../modules/decision";
 import { connected } from "../../app/setup";
@@ -10,6 +10,7 @@ import {
   publicityInfoDeletionDtoType,
   publicityInfoCreationDtoType,
 } from "./types";
+import { userService } from "../../modules/user";
 
 export { buildRoutes };
 
@@ -58,6 +59,23 @@ function buildRoutes() {
         await publicityInfoService.findAllDecisionsToRelease();
       return { kind: "success", response: publicityInfos };
     })
+  );
+
+  router.get(
+    "/login",
+    buildController(
+      async (params: { email: userType["email"]; password: string }) => {
+        const user = await userService.login({
+          email: params.email,
+          password: params.password,
+        });
+        return { kind: "success", response: user };
+      },
+      (request) => ({
+        email: request.query.email as string,
+        password: request.query.password as string,
+      })
+    )
   );
 
   router.delete<"publicityInfos", any, Array<publicityInfoDeletionDtoType>>(
