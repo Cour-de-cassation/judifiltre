@@ -2,6 +2,7 @@ import { buildCallAttemptsRegulator } from "sder-core";
 import { clear } from "./clear";
 import { buildLogin } from "./login";
 import { signUp } from "./signUp";
+import { fetchAuthenticatedUserFromAuthorizationHeader } from "./fetchAuthenticatedUserFromAuthorizationHeader";
 
 export { userService };
 
@@ -17,5 +18,10 @@ function buildUserService() {
     DELAY_BETWEEN_LOGIN_ATTEMPTS_IN_SECONDS
   );
 
-  return { clear, login: buildLogin(checkCallAttempts), signUp };
+  return {
+    clear,
+    login: buildLogin(checkCallAttempts),
+    signUp,
+    fetchAuthenticatedUserFromAuthorizationHeader,
+  };
 }

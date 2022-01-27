@@ -12,6 +12,7 @@ import {
   publicityInfoCreationDtoType,
 } from "./types";
 import { userService } from "../../modules/user";
+import { buildAuthenticatedController } from "./lib/buildAuthenticatedController";
 
 export { buildRoutes };
 
@@ -20,7 +21,7 @@ function buildRoutes() {
 
   router.get(
     "/publicityInfos",
-    buildController(async () => {
+    buildAuthenticatedController(async () => {
       const publicityInfos = await publicityInfoService.findAll();
       return {
         kind: "success",
@@ -35,7 +36,7 @@ function buildRoutes() {
     { publicityAssessment: publicityInfoType["publicity"]["assessment"] }
   >(
     "/publicityInfos/:publicityInfoId",
-    buildController(
+    buildAuthenticatedController(
       async (params: {
         publicityInfoId: string;
         publicityAssessment: publicityInfoType["publicity"]["assessment"];
@@ -134,7 +135,7 @@ function buildRoutes() {
 
   router.get(
     "/decision/",
-    buildController(
+    buildAuthenticatedController(
       async (params: { publicityInfoId: string }) => {
         if (!params.publicityInfoId) {
           return {
