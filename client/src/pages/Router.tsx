@@ -1,5 +1,11 @@
-import React from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import React, { FunctionComponent } from "react";
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  RouteProps,
+  Switch,
+} from "react-router-dom";
 import { localStorage } from "../services/localStorage";
 import { Assessor } from "./Assessor";
 import { Login } from "./Login";
@@ -11,12 +17,12 @@ function Router() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={routes.ASSESSOR_DOCUMENT.getPath()}>
+        <AuthenticatedRoute path={routes.ASSESSOR_DOCUMENT.getPath()}>
           <Assessor />
-        </Route>
-        <Route path={routes.ASSESSOR_HOME.getPath()}>
+        </AuthenticatedRoute>
+        <AuthenticatedRoute path={routes.ASSESSOR_HOME.getPath()}>
           <Assessor />
-        </Route>
+        </AuthenticatedRoute>
         <Route path={routes.LOGIN.getPath()}>
           <Login />
         </Route>
@@ -38,6 +44,28 @@ function Router() {
     </BrowserRouter>
   );
 }
+
+const AuthenticatedRoute: FunctionComponent<RouteProps> = ({
+  children,
+  ...rest
+}: RouteProps) => (
+  <Route
+    {...rest}
+    render={({ location }) =>
+      isAuthenticated() ? (
+        children
+      ) : (
+        <Redirect
+          to={{
+            pathname: routes.LOGIN.getPath(),
+            state: { from: location },
+          }}
+        />
+      )
+    }
+  />
+);
+
 function isAuthenticated() {
   return !!localStorage.bearerTokenHandler.get();
 }
