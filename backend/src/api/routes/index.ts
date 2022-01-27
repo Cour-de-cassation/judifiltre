@@ -1,4 +1,5 @@
 import express from "express";
+import { CustomError, httpStatusCodeHandler } from "sder-core";
 import { idModule, publicityInfoType, userType } from "judifiltre-core";
 import { publicityInfoService } from "../../modules/publicityInfo";
 import { decisionService } from "../../modules/decision";
@@ -65,11 +66,23 @@ function buildRoutes() {
     "/login",
     buildController(
       async (params: { email: userType["email"]; password: string }) => {
-        const user = await userService.login({
-          email: params.email,
-          password: params.password,
-        });
-        return { kind: "success", response: user };
+        try {
+          const user = await userService.login({
+            email: params.email,
+            password: params.password,
+          });
+          return { kind: "success", response: user };
+        } catch (error) {
+          console.error(error);
+          return {
+            kind: "error",
+            message: "Login failed",
+            statusCode:
+              error instanceof CustomError
+                ? error.statusCode
+                : httpStatusCodeHandler.HTTP_STATUS_CODE.ERROR.SERVER_ERROR,
+          };
+        }
       },
       (request) => ({
         email: request.query.email as string,

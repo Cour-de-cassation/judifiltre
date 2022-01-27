@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { localStorage } from "../services/localStorage";
 import { Assessor } from "./Assessor";
 import { Login } from "./Login";
 import { routes } from "./routes";
@@ -24,7 +25,9 @@ function Router() {
           render={({ location }) => (
             <Redirect
               to={{
-                pathname: routes.ASSESSOR_HOME.getPath(),
+                pathname: isAuthenticated()
+                  ? routes.ASSESSOR_HOME.getPath()
+                  : routes.LOGIN.getPath(),
                 state: { from: location },
               }}
             />
@@ -34,4 +37,7 @@ function Router() {
       </Switch>
     </BrowserRouter>
   );
+}
+function isAuthenticated() {
+  return !!localStorage.bearerTokenHandler.get();
 }
