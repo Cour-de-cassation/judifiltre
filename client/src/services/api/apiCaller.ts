@@ -1,3 +1,5 @@
+import { localStorage } from "../localStorage";
+
 export { apiCaller };
 
 const DEFAULT_HEADER = {
@@ -6,7 +8,9 @@ const DEFAULT_HEADER = {
   "Cross-Origin-Embedder-Policy": "require-corp",
 };
 
-const API_URL = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : "http://localhost:8080/judifiltre/api/";
+const API_URL = process.env.REACT_APP_API_URL
+  ? process.env.REACT_APP_API_URL
+  : "http://localhost:8080/judifiltre/api/";
 
 type paramType = string | number;
 
@@ -20,14 +24,15 @@ const apiCaller = {
     data: responseT;
     statusCode: number;
   }> {
+    const bearerToken = localStorage.bearerTokenHandler.get();
+
     const response = await fetch(
-      buildUrlWithParams(
-        API_URL + routeName,
-        params
-      ),
+      buildUrlWithParams(API_URL + routeName, params),
       {
         cache: "default",
-        headers: DEFAULT_HEADER,
+        headers: bearerToken
+          ? { ...DEFAULT_HEADER, authorization: `Bearer ${bearerToken}` }
+          : DEFAULT_HEADER,
         method: "get",
         mode: "cors",
       }
@@ -40,7 +45,7 @@ const apiCaller = {
       statusCode: response.status,
     };
   },
-  
+
   async put<responseT>(
     routeName: string,
     body?: string,
@@ -49,17 +54,18 @@ const apiCaller = {
     data: responseT;
     statusCode: number;
   }> {
+    const bearerToken = localStorage.bearerTokenHandler.get();
+
     const response = await fetch(
-      buildUrlWithParams(
-        API_URL + routeName,
-        params
-      ),
+      buildUrlWithParams(API_URL + routeName, params),
       {
         cache: "default",
-        headers: DEFAULT_HEADER,
+        headers: bearerToken
+          ? { ...DEFAULT_HEADER, authorization: `Bearer ${bearerToken}` }
+          : DEFAULT_HEADER,
         method: "put",
         mode: "cors",
-        body
+        body,
       }
     );
 
