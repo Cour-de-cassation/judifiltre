@@ -11,6 +11,7 @@ import {
   publicityInfoCreationDtoType,
 } from "./types";
 import { userService } from "../../modules/user";
+import { buildAuthenticatedController } from "./lib/buildAuthenticatedController";
 
 export { buildRoutes };
 
@@ -19,12 +20,14 @@ function buildRoutes() {
 
   router.get(
     "/publicityInfos",
-    buildController(async () => {
-      const publicityInfos = await publicityInfoService.findAll();
-      return {
-        kind: "success",
-        response: publicityInfos,
-      };
+    buildAuthenticatedController({
+      controllerWithUser: async () => {
+        const publicityInfos = await publicityInfoService.findAll();
+        return {
+          kind: "success",
+          response: publicityInfos,
+        };
+      },
     })
   );
 

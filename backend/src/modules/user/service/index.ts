@@ -17,5 +17,9 @@ function buildUserService() {
     DELAY_BETWEEN_LOGIN_ATTEMPTS_IN_SECONDS
   );
 
-  return { clear, login: buildLogin(checkCallAttempts), signUp };
+  return {
+    clear,
+    login: buildLogin(checkCallAttempts),
+    signUp,
+  };
 }
