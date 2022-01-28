@@ -11,8 +11,8 @@ const buildJuricaDecisionProdRepository = buildRepositoryBuilder<
   dbName: "jurica",
   collectionName: "DOCUMENT",
   buildCustomRepository: (collection) => ({
-    findByDocumentId: async (documentId: juricaDecisionType["DOCUMENT_ID"]) => {
-      const item = await collection.findOne({ DOCUMENT_ID: documentId });
+    findByDocumentId: async (documentId: juricaDecisionType["_id"]) => {
+      const item = await collection.findOne({ _id: documentId as any });
 
       return item || undefined;
     },

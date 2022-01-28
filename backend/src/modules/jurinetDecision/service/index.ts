@@ -10,7 +10,7 @@ const jurinetDecisionService = {
     return jurinetDecisionRepository.clear();
   },
 
-  async findByDocumentId(documentId: jurinetDecisionType["DOCUMENT_ID"]) {
+  async findByDocumentId(documentId: jurinetDecisionType["_id"]) {
     const jurinetDecisionRepository = buildJurinetDecisionRepository();
 
     return jurinetDecisionRepository.findByDocumentId(documentId);
