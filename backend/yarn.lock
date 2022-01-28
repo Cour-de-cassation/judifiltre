@@ -392,6 +392,13 @@ bson@^4.5.4:
   dependencies:
     buffer "^5.6.0"
 
+bson@^4.6.1:
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-4.6.1.tgz#2b5da517539bb0f7f3ffb54ac70a384ca899641c"
+  integrity sha512-I1LQ7Hz5zgwR4QquilLNZwbhPw0Apx7i7X9kGMBTsqPdml/03Q9NBtD9nt/19ahjlphktQImrnderxqpzeVDjw==
+  dependencies:
+    buffer "^5.6.0"
+
 buffer-equal-constant-time@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
@@ -1185,13 +1192,13 @@ jsonwebtoken@^8.5.1:
     ms "^2.1.1"
     semver "^5.6.0"
 
-"judifiltre-core@https://github.com/Cour-de-cassation/judifiltre-core#881d0b54a7347fd5af35ca5b9cc196a9e67f218c":
+"judifiltre-core@https://github.com/Cour-de-cassation/judifiltre-core#9c8dadf44ce72e1bd7a07f97bd298815eb0c8a43":
   version "0.0.1"
-  resolved "https://github.com/Cour-de-cassation/judifiltre-core#881d0b54a7347fd5af35ca5b9cc196a9e67f218c"
+  resolved "https://github.com/Cour-de-cassation/judifiltre-core#9c8dadf44ce72e1bd7a07f97bd298815eb0c8a43"
   dependencies:
-    mongodb "^4.1.3"
+    bson "^4.6.1"
     sder-core "https://github.com/Cour-de-cassation/sder-core#f19400e5832d88b48d076b99bbea3e4cfd6803f4"
-    typescript "^4.4.3"
+    typescript "^4.5.4"
 
 jwa@^1.4.1:
   version "1.4.1"
@@ -1350,7 +1357,7 @@ mongodb-connection-string-url@^2.1.0:
     "@types/whatwg-url" "^8.2.1"
     whatwg-url "^9.1.0"
 
-mongodb@=4.1.4, mongodb@^4.1.3:
+mongodb@=4.1.4:
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-4.1.4.tgz#ba8062c7c67e7a22db5a059dbac1e3044b48453b"
   integrity sha512-Cv/sk8on/tpvvqbEvR1h03mdyNdyvvO+WhtFlL4jrZ+DSsN/oSQHVqmJQI/sBCqqbOArFcYCAYDfyzqFwV4GSQ==
@@ -1947,11 +1954,6 @@ type-is@~1.6.17, type-is@~1.6.18:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.24"
-
-typescript@^4.4.3:
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.3.tgz#bdc5407caa2b109efd4f82fe130656f977a29324"
-  integrity sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==
 
 typescript@^4.5.4:
   version "4.5.4"
