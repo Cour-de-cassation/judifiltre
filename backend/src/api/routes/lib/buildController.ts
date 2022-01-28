@@ -1,13 +1,7 @@
 import { Request, Response } from "express";
+import { controllerType } from "./controllerType";
 
 export { buildController };
-
-type controllerType<paramT> = (
-  params: paramT
-) => Promise<
-  | { kind: "success"; response?: any; statusCode?: number }
-  | { kind: "error"; message: string; statusCode: number }
->;
 
 function buildController<paramT>(
   executeController: controllerType<paramT>,

@@ -11,6 +11,7 @@ import {
   heights,
   Text,
 } from "pelta-design-system";
+import { LogoutButton } from "../../components";
 
 export { Assessor };
 
@@ -78,7 +79,7 @@ function Assessor() {
   }
 
   function buildRightHeaderComponents() {
-    return [];
+    return [<LogoutButton key="logoutButton" />];
   }
 
   function buildLeftHeaderComponents() {

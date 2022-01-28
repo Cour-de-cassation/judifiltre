@@ -10,7 +10,7 @@ const juricaDecisionService = {
     return juricaDecisionRepository.clear();
   },
 
-  async findByDocumentId(documentId: juricaDecisionType["DOCUMENT_ID"]) {
+  async findByDocumentId(documentId: juricaDecisionType["_id"]) {
     const juricaDecisionRepository = buildJuricaDecisionRepository();
 
     return juricaDecisionRepository.findByDocumentId(documentId);

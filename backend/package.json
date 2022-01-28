@@ -17,12 +17,13 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
-    "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#fb78762285234acae56d73b8be889f97f4eeb744",
+    "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#9c8dadf44ce72e1bd7a07f97bd298815eb0c8a43",
     "lodash": "^4.17.21",
     "mongodb": "=4.1.4",
     "needle": "^3.0.0",
     "sder": "https://github.com/Cour-de-cassation/sder#6dd6e858cdd2486b7a9b27a19df2a85f9cabd244",
-    "typescript": "^4.4.4"
+    "sder-core": "https://github.com/Cour-de-cassation/sder-core#f19400e5832d88b48d076b99bbea3e4cfd6803f4",
+    "typescript": "^4.5.4"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

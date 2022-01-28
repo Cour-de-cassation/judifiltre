@@ -4,6 +4,6 @@ export { customJurinetDecisionRepositoryType };
 
 type customJurinetDecisionRepositoryType = {
   findByDocumentId: (
-    documentId: jurinetDecisionType["DOCUMENT_ID"]
+    documentId: jurinetDecisionType["_id"]
   ) => Promise<jurinetDecisionType | undefined>;
 };
