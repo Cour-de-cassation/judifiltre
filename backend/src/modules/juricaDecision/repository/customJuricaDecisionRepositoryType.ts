@@ -4,6 +4,6 @@ export { customJuricaDecisionRepositoryType };
 
 type customJuricaDecisionRepositoryType = {
   findByDocumentId: (
-    documentId: juricaDecisionType["DOCUMENT_ID"]
+    documentId: juricaDecisionType["_id"]
   ) => Promise<juricaDecisionType | undefined>;
 };

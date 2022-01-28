@@ -22,14 +22,14 @@ async function initDbDev() {
     .filter((publicityInfo) => publicityInfo.sourceDb === "jurica")
     .map((publicityInfo) =>
       juricaDecisionModule.lib.generateJuricaDecision({
-        DOCUMENT_ID: publicityInfo.sourceId,
+        _id: publicityInfo.sourceId as any,
       })
     );
   const jurinetDecisions = publicityInfos
     .filter((publicityInfo) => publicityInfo.sourceDb === "jurinet")
     .map((publicityInfo) =>
       jurinetDecisionModule.lib.generateJurinetDecision({
-        DOCUMENT_ID: publicityInfo.sourceId,
+        _id: publicityInfo.sourceId as any,
       })
     );
   await publicityInfoService.insertMany(publicityInfos);
