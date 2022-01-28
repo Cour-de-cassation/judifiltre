@@ -7,11 +7,13 @@ import {
 import { publicityInfoService } from "../../modules/publicityInfo";
 import { jurinetDecisionService } from "../../modules/jurinetDecision";
 import { juricaDecisionService } from "../../modules/juricaDecision";
+import { userService } from "../../modules/user";
 import { runScript } from "./runScript";
 
 const PUBLICITY_INFOS_COUNT = 20;
 
 async function initDbDev() {
+  await userService.clear();
   await publicityInfoService.clear();
   await juricaDecisionService.clear();
   await jurinetDecisionService.clear();
@@ -32,9 +34,15 @@ async function initDbDev() {
         _id: publicityInfo.sourceId as any,
       })
     );
+
   await publicityInfoService.insertMany(publicityInfos);
   await jurinetDecisionService.insertMany(jurinetDecisions);
   await juricaDecisionService.insertMany(juricaDecisions);
+  await userService.signUp({
+    email: "auditeur@justice.fr",
+    name: "Auditeur",
+    password: "Cassation01..3",
+  });
 }
 
 runScript(initDbDev);

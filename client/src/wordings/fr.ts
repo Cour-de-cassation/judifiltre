@@ -1,6 +1,9 @@
 export { fr };
 
 const fr = {
+  shared: {
+    logout: "Se déconnecter",
+  },
   assessor: {
     decisionViewer: {
       buttons: {

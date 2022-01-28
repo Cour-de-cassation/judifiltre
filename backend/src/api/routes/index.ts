@@ -1,5 +1,6 @@
 import express from "express";
-import { idModule, publicityInfoType } from "judifiltre-core";
+import { CustomError, httpStatusCodeHandler } from "sder-core";
+import { idModule, publicityInfoType, userType } from "judifiltre-core";
 import { publicityInfoService } from "../../modules/publicityInfo";
 import { decisionService } from "../../modules/decision";
 import { connected } from "../../app/setup";
@@ -10,6 +11,8 @@ import {
   publicityInfoDeletionDtoType,
   publicityInfoCreationDtoType,
 } from "./types";
+import { userService } from "../../modules/user";
+import { buildAuthenticatedController } from "./lib/buildAuthenticatedController";
 
 export { buildRoutes };
 
@@ -18,7 +21,7 @@ function buildRoutes() {
 
   router.get(
     "/publicityInfos",
-    buildController(async () => {
+    buildAuthenticatedController(async () => {
       const publicityInfos = await publicityInfoService.findAll();
       return {
         kind: "success",
@@ -33,7 +36,7 @@ function buildRoutes() {
     { publicityAssessment: publicityInfoType["publicity"]["assessment"] }
   >(
     "/publicityInfos/:publicityInfoId",
-    buildController(
+    buildAuthenticatedController(
       async (params: {
         publicityInfoId: string;
         publicityAssessment: publicityInfoType["publicity"]["assessment"];
@@ -58,6 +61,35 @@ function buildRoutes() {
         await publicityInfoService.findAllDecisionsToRelease();
       return { kind: "success", response: publicityInfos };
     })
+  );
+
+  router.get(
+    "/login",
+    buildController(
+      async (params: { email: userType["email"]; password: string }) => {
+        try {
+          const user = await userService.login({
+            email: params.email,
+            password: params.password,
+          });
+          return { kind: "success", response: user };
+        } catch (error) {
+          console.error(error);
+          return {
+            kind: "error",
+            message: "Login failed",
+            statusCode:
+              error instanceof CustomError
+                ? error.statusCode
+                : httpStatusCodeHandler.HTTP_STATUS_CODE.ERROR.SERVER_ERROR,
+          };
+        }
+      },
+      (request) => ({
+        email: request.query.email as string,
+        password: request.query.password as string,
+      })
+    )
   );
 
   router.delete<"publicityInfos", any, Array<publicityInfoDeletionDtoType>>(
@@ -103,7 +135,7 @@ function buildRoutes() {
 
   router.get(
     "/decision/",
-    buildController(
+    buildAuthenticatedController(
       async (params: { publicityInfoId: string }) => {
         if (!params.publicityInfoId) {
           return {
