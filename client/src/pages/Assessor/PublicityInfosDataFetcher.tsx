@@ -5,7 +5,6 @@ import { apiCaller, useApi, DataFetcher } from "../../services/api";
 export { PublicityInfosDataFetcher };
 
 function PublicityInfosDataFetcher(props: {
-
   children: (fetched: {
     publicityInfos: publicityInfoType[];
     refetch: () => void;

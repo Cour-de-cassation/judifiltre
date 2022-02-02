@@ -49,7 +49,7 @@ function buildRoutes() {
       },
       (request) => ({
         publicityInfoId: request.params.publicityInfoId,
-        publicityAssessment: request.body.publicityInfoAssessment,
+        publicityAssessment: request.body.publicityAssessment,
       })
     )
   );

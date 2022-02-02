@@ -4,14 +4,14 @@
   "private": true,
   "homepage": "/judifiltre",
   "dependencies": {
-    "axios": "^0.24.0",
+    "axios": "^0.25.0",
     "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#881d0b54a7347fd5af35ca5b9cc196a9e67f218c",
     "pelta-design-system": "https://github.com/Cour-de-cassation/pelta-design-system#60e71ec7c2dd462db5f570261504b925145af3b7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^5.3.0",
+    "react-router-dom": "=5.3.0",
     "react-scripts": "4.0.3",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.1",
@@ -23,9 +23,9 @@
     "@types/node": "=16.11.19",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
-    "@types/react-router-dom": "^5.3.2",
-    "@typescript-eslint/eslint-plugin": "^5.9.0",
-    "@typescript-eslint/parser": "^5.9.0",
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.28.0"

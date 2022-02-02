@@ -20,27 +20,16 @@ const publicityInfoService = {
     const publicityInfoRepository = buildPublicityInfoRepository();
 
     const frozenPublicityInfos = await publicityInfoRepository.findAll();
-    const partiallyReleasableDecisions = [];
     const releasableDecisions = [];
     for (const publicityInfo of frozenPublicityInfos) {
-      switch (publicityInfo.publicity.assessment?.kind) {
-        case "public":
-          releasableDecisions.push({
-            sourceId: publicityInfo.sourceId,
-            sourceDb: publicityInfo.sourceDb,
-          });
-          break;
-        case "partiallyPublic":
-          partiallyReleasableDecisions.push({
-            sourceId: publicityInfo.sourceId,
-            sourceDb: publicityInfo.sourceDb,
-            text: publicityInfo.publicity.assessment.publicExtract,
-          });
-          break;
+      if (publicityInfo.publicity.assessment === "public") {
+        releasableDecisions.push({
+          sourceId: publicityInfo.sourceId,
+          sourceDb: publicityInfo.sourceDb,
+        });
       }
     }
     return {
-      partiallyReleasableDecisions,
       releasableDecisions,
     };
   },
