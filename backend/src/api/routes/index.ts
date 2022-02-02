@@ -45,7 +45,7 @@ function buildRoutes() {
           idModule.lib.buildId(params.publicityInfoId),
           params.publicityAssessment
         );
-        return { kind: "success", response: params.publicityAssessment };
+        return { kind: "success" };
       },
       (request) => ({
         publicityInfoId: request.params.publicityInfoId,
