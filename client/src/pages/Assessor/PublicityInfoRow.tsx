@@ -36,7 +36,7 @@ function PublicityInfoRow(props: {
         </Text>
       </td>
       <td style={props.isSelected ? styles.selectedLastCells : undefined}>
-        <Text>{props.publicityInfo.publicity.assessment}</Text>
+        <Text>{props.publicityInfo.publicity.assessment ?? "-"}</Text>
       </td>
     </tr>
   );

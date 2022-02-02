@@ -17,7 +17,7 @@
     "cors": "^2.8.5",
     "dotenv": "^15.0.0",
     "express": "^4.17.2",
-    "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#9c8dadf44ce72e1bd7a07f97bd298815eb0c8a43",
+    "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#a7b9a1f73f7a72bfb2969dbe37b7e06d5b7b9329",
     "lodash": "^4.17.21",
     "mongodb": "=4.1.4",
     "needle": "^3.0.0",

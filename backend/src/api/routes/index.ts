@@ -45,11 +45,11 @@ function buildRoutes() {
           idModule.lib.buildId(params.publicityInfoId),
           params.publicityAssessment
         );
-        return { kind: "success" };
+        return { kind: "success", response: params.publicityAssessment };
       },
       (request) => ({
         publicityInfoId: request.params.publicityInfoId,
-        publicityAssessment: request.body.publicityInfoAssessment,
+        publicityAssessment: request.body.publicityAssessment,
       })
     )
   );
