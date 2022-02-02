@@ -25,13 +25,15 @@ function DecisionViewer(props: {
           <div style={styles.documentContainer}>
             <div style={styles.documentTextContainer}>
               <table style={styles.documentTextTable}>
-                {lineSplitter
-                  .splitTextAccordingToNewLine(decision)
-                  .map((line, index) => (
-                    <tr key={index}>
-                      <td style={styles.lineCell}>{line}</td>
-                    </tr>
-                  ))}
+                <tbody>
+                  {lineSplitter
+                    .splitTextAccordingToNewLine(decision)
+                    .map((line, index) => (
+                      <tr key={index}>
+                        <td style={styles.lineCell}>{line}</td>
+                      </tr>
+                    ))}
+                </tbody>
               </table>
             </div>
           </div>
@@ -39,11 +41,6 @@ function DecisionViewer(props: {
             <DecisionPublicityButton
               publicityInfoId={props.publicityInfoId}
               publicityAssessment="notPublic"
-              refetchPublicityInfos={props.refetchPublicityInfos}
-            />
-            <DecisionPublicityButton
-              publicityInfoId={props.publicityInfoId}
-              publicityAssessment="partiallyPublic"
               refetchPublicityInfos={props.refetchPublicityInfos}
             />
             <DecisionPublicityButton
