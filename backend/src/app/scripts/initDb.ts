@@ -9,4 +9,4 @@ async function initDb() {
   await jurinetDecisionService.clear();
 }
 
-runScript(initDb);
+runScript(initDb, {});
