@@ -19,7 +19,7 @@
     "express": "^4.17.2",
     "judifiltre-core": "https://github.com/Cour-de-cassation/judifiltre-core#a7b9a1f73f7a72bfb2969dbe37b7e06d5b7b9329",
     "lodash": "^4.17.21",
-    "mongodb": "=4.1.4",
+    "mongodb": "4.3.0",
     "needle": "^3.0.0",
     "sder": "https://github.com/Cour-de-cassation/sder#6dd6e858cdd2486b7a9b27a19df2a85f9cabd244",
     "sder-core": "https://github.com/Cour-de-cassation/sder-core#f19400e5832d88b48d076b99bbea3e4cfd6803f4",
