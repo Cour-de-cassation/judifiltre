@@ -45,4 +45,4 @@ async function initDbDev() {
   });
 }
 
-runScript(initDbDev);
+runScript(initDbDev, {});
