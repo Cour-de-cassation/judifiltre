@@ -4,7 +4,7 @@ import { runScript } from "./runScript";
 async function listUsers(argv: { email: string }) {
   const users = await userService.list();
   users.forEach((user) => {
-    console.log("- " + user.email);
+    console.log("- " + user.name + " | " + user.email);
   });
 }
 
