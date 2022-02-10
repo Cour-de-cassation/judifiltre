@@ -21,11 +21,11 @@ const buildUserProdRepository = buildRepositoryBuilder<
     },
     remove: async (id) => {
       const builtId = idModule.lib.buildId(id);
-      const result = collection.deleteOne({ _id: builtId });
+      const result = await collection.deleteOne({ _id: builtId });
       if (!result) {
-        throw new Error(`No item for this collection`);
+        throw new Error(`No user to delete`);
       }
-      return;
+      return result.deletedCount;
     },
     listAll: async () => {
       const result = collection.find().toArray();
