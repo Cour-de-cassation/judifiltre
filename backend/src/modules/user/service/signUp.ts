@@ -13,6 +13,9 @@ async function signUp({
   password: string;
 }) {
   const userRepository = buildUserRepository();
+  if (await userRepository.findByEmail(email)) {
+    throw new Error(`A user already exists with this email`);
+  }
   const newUser = await userModule.lib.buildUser({
     email,
     name,
