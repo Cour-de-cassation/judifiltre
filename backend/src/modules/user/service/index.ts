@@ -1,6 +1,8 @@
 import { buildCallAttemptsRegulator } from "sder-core";
 import { clear } from "./clear";
 import { buildLogin } from "./login";
+import { list } from "./list";
+import { remove } from "./remove";
 import { signUp } from "./signUp";
 import { fetchAuthenticatedUserFromAuthorizationHeader } from "./fetchAuthenticatedUserFromAuthorizationHeader";
 
@@ -20,6 +22,8 @@ function buildUserService() {
 
   return {
     clear,
+    list,
+    remove,
     login: buildLogin(checkCallAttempts),
     signUp,
     fetchAuthenticatedUserFromAuthorizationHeader,
