@@ -8,8 +8,8 @@ const buildJuricaDecisionProdRepository = buildRepositoryBuilder<
   juricaDecisionType,
   customJuricaDecisionRepositoryType
 >({
-  dbName: "jurica",
-  collectionName: "DOCUMENT",
+  dbName: "SDER",
+  collectionName: "rawJurica",
   buildCustomRepository: (collection) => ({
     findByDocumentId: async (documentId: juricaDecisionType["_id"]) => {
       const item = await collection.findOne({ _id: documentId as any });
