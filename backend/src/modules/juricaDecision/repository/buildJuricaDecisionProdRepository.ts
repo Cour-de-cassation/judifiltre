@@ -8,7 +8,7 @@ const buildJuricaDecisionProdRepository = buildRepositoryBuilder<
   juricaDecisionType,
   customJuricaDecisionRepositoryType
 >({
-  dbName: "SDER",
+  dbName: process.env.JURICA_DBNAME || "jurica",
   collectionName: "rawJurica",
   buildCustomRepository: (collection) => ({
     findByDocumentId: async (documentId: juricaDecisionType["_id"]) => {

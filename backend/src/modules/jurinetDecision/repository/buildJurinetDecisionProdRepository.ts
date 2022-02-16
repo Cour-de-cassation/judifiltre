@@ -8,7 +8,7 @@ const buildJurinetDecisionProdRepository = buildRepositoryBuilder<
   jurinetDecisionType,
   customJurinetDecisionRepositoryType
 >({
-  dbName: "SDER",
+  dbName: process.env.JURINET_DBNAME || "jurinet",
   collectionName: "rawJurinet",
   buildCustomRepository: (collection) => ({
     findByDocumentId: async (documentId: jurinetDecisionType["_id"]) => {
