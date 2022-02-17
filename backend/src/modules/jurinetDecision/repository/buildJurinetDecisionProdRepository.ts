@@ -8,8 +8,8 @@ const buildJurinetDecisionProdRepository = buildRepositoryBuilder<
   jurinetDecisionType,
   customJurinetDecisionRepositoryType
 >({
-  dbName: "jurinet",
-  collectionName: "DOCUMENT",
+  dbName: process.env.JURINET_DBNAME || "jurinet",
+  collectionName: "rawJurinet",
   buildCustomRepository: (collection) => ({
     findByDocumentId: async (documentId: jurinetDecisionType["_id"]) => {
       const item = await collection.findOne({ _id: documentId as any });
