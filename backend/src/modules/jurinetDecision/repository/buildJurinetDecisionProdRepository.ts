@@ -12,7 +12,7 @@ const buildJurinetDecisionProdRepository = buildRepositoryBuilder<
   collectionName: "rawJurinet",
   buildCustomRepository: (collection) => ({
     findByDocumentId: async (documentId: jurinetDecisionType["_id"]) => {
-      const item = await collection.findOne({ _id: documentId as any });
+      const item = await collection.findOne({ sourceId: documentId as any });
 
       return item || undefined;
     },
