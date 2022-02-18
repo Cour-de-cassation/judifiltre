@@ -4,7 +4,7 @@ import { repositoryType } from "./repositoryType";
 
 export { buildRepositoryBuilder };
 
-function buildRepositoryBuilder<T extends { _id: idType }, U>({
+function buildRepositoryBuilder<T extends { _id: any }, U>({
   dbName,
   collectionName,
   buildCustomRepository,
