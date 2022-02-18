@@ -100,7 +100,6 @@ jobs:
           APP_ID: judifiltre-backend
           APP_KEYWORD: "\"disponible\""
           GIT_BRANCH: ${{ steps.extract_branch.outputs.branch }}
-          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
           ROOT_PATH: judifiltre/api
       - name: 👤  Build static app -- client
         if: (matrix.node-version == '16.x') && (steps.client_check.outputs.status == 'build_needed')
@@ -140,5 +139,4 @@ jobs:
           APP_ID: judifiltre-client
           APP_KEYWORD: html
           GIT_BRANCH: ${{ steps.extract_branch.outputs.branch }}
-          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
           ROOT_PATH: judifiltre

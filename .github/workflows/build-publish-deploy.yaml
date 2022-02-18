@@ -100,7 +100,6 @@ jobs:
           APP_ID: judifiltre-backend
           APP_KEYWORD: "\"disponible\""
           GIT_BRANCH: ${{ steps.extract_branch.outputs.branch }}
-          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
           ROOT_PATH: judifiltre/api
       - name: 🔙🚀 Push docker image -- backend
         if: (matrix.node-version == '16.x') && (steps.backend_check.outputs.status == 'build_needed') && (github.event_name == 'push')
@@ -154,7 +153,6 @@ jobs:
           APP_ID: judifiltre-client
           APP_KEYWORD: html
           GIT_BRANCH: ${{ steps.extract_branch.outputs.branch }}
-          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
           ROOT_PATH: judifiltre
       - name: 👤🚀 Push docker image -- client
         if: (matrix.node-version == '16.x') && (steps.client_check.outputs.status == 'build_needed') && (github.event_name == 'push')
@@ -183,7 +181,7 @@ jobs:
       APP_KEYWORD: specific # to backend or client
       DOCKER_USERNAME: opendatajustice
       KUBE_NAMESPACE: judilibre-prive-judifiltre
-      # KUBE_SERVICES_FORCE_UPDATE: deployment #temporary force re-deployment if config changed
+      KUBE_SERVICES_FORCE_UPDATE: ${{ secrets.KUBE_SERVICES_FORCE_UPDATE }}
       KUBE_TYPE: k3s
       KUBE_ZONE: prive
       ROOT_PATH: judifiltre* # specific to backend or client

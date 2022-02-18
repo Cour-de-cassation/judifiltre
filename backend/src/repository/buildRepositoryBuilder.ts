@@ -4,7 +4,7 @@ import { repositoryType } from "./repositoryType";
 
 export { buildRepositoryBuilder };
 
-function buildRepositoryBuilder<T extends { _id: idType }, U>({
+function buildRepositoryBuilder<T extends { _id: any }, U>({
   dbName,
   collectionName,
   buildCustomRepository,
@@ -39,7 +39,9 @@ function buildRepositoryBuilder<T extends { _id: idType }, U>({
       const result = await collection.findOne({ _id: id });
 
       if (!result) {
-        throw new Error(`No matching ${collectionName} for _id ${id}`);
+        throw new Error(
+          `No matching ${collectionName} for _id ${id} in ${dbName}`
+        );
       }
 
       return result;
