@@ -15,7 +15,7 @@ const decisionService = {
     switch (sourceDb) {
       case "jurica":
         const juricaDecision = await juricaDecisionService.findByDocumentId(
-          sourceId as any
+          sourceId
         );
         return (
           juricaDecision &&
@@ -23,7 +23,7 @@ const decisionService = {
         );
       case "jurinet":
         const jurinetDecision = await jurinetDecisionService.findByDocumentId(
-          sourceId as any
+          sourceId
         );
         return (
           jurinetDecision?.XML &&
