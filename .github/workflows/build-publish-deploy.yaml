@@ -231,8 +231,8 @@ jobs:
           JUDIFILTRE_DBNAME: ${{ secrets.JUDIFILTRE_DBNAME }}
           ROOT_PATH: judifiltre/api
           VERSION: ${{ steps.backend_version.outputs.version }}
-      - name: 🔙 initDb for test -- backend
-        run: kubectl -n ${KUBE_NAMESPACE} exec $(kubectl -n ${KUBE_NAMESPACE} get pods | grep judifiltre-backend | awk '{print $1}')  --  node dist/app/scripts/initDb.js
+      # - name: 🔙 initDb for test -- backend
+      #   run: kubectl -n ${KUBE_NAMESPACE} exec $(kubectl -n ${KUBE_NAMESPACE} get pods | grep judifiltre-backend | awk '{print $1}')  --  node dist/app/scripts/initDb.js
       - name: 🔙🚀 Update remote app ☸️ -- backend
         run: |
           if [ "${GIT_BRANCH}" == "dev" ];then
