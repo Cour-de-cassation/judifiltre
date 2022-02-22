@@ -4,9 +4,8 @@ import { juricaDecisionService } from "../../modules/juricaDecision";
 import { runScript } from "./runScript";
 
 async function initDb() {
+  // shouldn't be runed after first run, as clears all
   await publicityInfoService.clear();
-  await juricaDecisionService.clear();
-  await jurinetDecisionService.clear();
 }
 
 runScript(initDb, {});
