@@ -1,9 +1,8 @@
 import { publicityInfoService } from "../../modules/publicityInfo";
 import { runScript } from "./runScript";
 
-async function initDb() {
-  // shouldn't be runed after first run, as clears all
+async function flushPublicityInfo() {
   await publicityInfoService.clear();
 }
 
-runScript(initDb, {});
+runScript(flushPublicityInfo, {});
