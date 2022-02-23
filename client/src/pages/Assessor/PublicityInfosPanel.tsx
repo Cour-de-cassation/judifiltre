@@ -40,7 +40,7 @@ function PublicityInfosPanel(props: {
               <Text>NAC</Text>
             </th>
             <th>
-              <Text>Demande</Text>
+              <Text>Orientation</Text>
             </th>
             <th>
               <Text>Diffusion</Text>
