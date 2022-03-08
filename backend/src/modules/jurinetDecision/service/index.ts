@@ -21,4 +21,11 @@ const jurinetDecisionService = {
 
     return Promise.all(jurinetDecisions.map(jurinetDecisionRepository.insert));
   },
+
+  async count() {
+    const jurinetDecisionRepository = buildJurinetDecisionRepository();
+    const result = await jurinetDecisionRepository.findAll();
+
+    return result.length;
+  },
 };

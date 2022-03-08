@@ -37,7 +37,10 @@ async function initDbDev() {
 
   await publicityInfoService.insertMany(publicityInfos);
   await jurinetDecisionService.insertMany(jurinetDecisions);
+  console.log((await jurinetDecisionService.count()) + " jurinet decisions");
   await juricaDecisionService.insertMany(juricaDecisions);
+  console.log((await juricaDecisionService.count()) + " jurica decisions");
+
   await userService.signUp({
     email: "auditeur@justice.fr",
     name: "Auditeur",
