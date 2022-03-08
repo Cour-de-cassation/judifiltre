@@ -102,7 +102,7 @@ function comparePublicityInfos(
 function buildStyles(theme: customThemeType) {
   return {
     panel: {
-      width: WIDTH,
+      minWidth: WIDTH,
       height: heights.adminPanel,
       overflowY: "scroll",
     },
