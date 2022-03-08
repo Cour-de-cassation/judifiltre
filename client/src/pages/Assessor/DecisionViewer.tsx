@@ -1,5 +1,5 @@
 import React from "react";
-import { customThemeType, useCustomTheme } from "pelta-design-system";
+import { customThemeType, heights, useCustomTheme } from "pelta-design-system";
 import { publicityInfoType } from "judifiltre-core";
 import { DecisionDataFetcher } from "./DecisionDataFetcher";
 import { DecisionPublicityButton } from "./DecisionPublicityButton";
@@ -21,22 +21,6 @@ function DecisionViewer(props: {
     <DecisionDataFetcher params={{ publicityInfoId: props.publicityInfoId }}>
       {({ decision }) => (
         <div style={styles.container}>
-          <div style={styles.documentHeaderContainer}></div>
-          <div style={styles.documentContainer}>
-            <div style={styles.documentTextContainer}>
-              <table style={styles.documentTextTable}>
-                <tbody>
-                  {lineSplitter
-                    .splitTextAccordingToNewLine(decision)
-                    .map((line, index) => (
-                      <tr key={index}>
-                        <td style={styles.lineCell}>{line}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
           <div style={styles.buttonContainer}>
             <DecisionPublicityButton
               publicityInfoId={props.publicityInfoId}
@@ -49,6 +33,19 @@ function DecisionViewer(props: {
               refetchPublicityInfos={props.refetchPublicityInfos}
             />
           </div>
+          <div style={styles.documentContainer}>
+            <table style={styles.documentTextTable}>
+              <tbody>
+                {lineSplitter
+                  .splitTextAccordingToNewLine(decision)
+                  .map((line, index) => (
+                    <tr key={index}>
+                      <td style={styles.lineCell}>{line}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </DecisionDataFetcher>
@@ -59,18 +56,15 @@ function buildStyles(theme: customThemeType) {
   return {
     container: {
       display: "flex",
-      flexDirection: "column",
+      flexDirection: "column-reverse",
+      height: heights.adminPanel,
       padding: theme.spacing * 2,
+      boxSizing: "border-box",
     },
-    documentHeaderContainer: {},
     documentContainer: {
-      width: "100vw",
       maxWidth: TEXT_CONTENT_WIDTH,
-      flex: 1,
       margin: "0 auto",
-    },
-    documentTextContainer: {
-      height: "100%",
+      flexGrow: 1,
       overflowY: "auto",
       backgroundColor: theme.colors.document,
       borderRadius: theme.shape.borderRadius.m,

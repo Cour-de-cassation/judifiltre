@@ -21,4 +21,11 @@ const juricaDecisionService = {
 
     return Promise.all(juricaDecisions.map(juricaDecisionRepository.insert));
   },
+
+  async count() {
+    const juricaDecisionRepository = buildJuricaDecisionRepository();
+    const result = await juricaDecisionRepository.findAll();
+
+    return result.length;
+  },
 };
