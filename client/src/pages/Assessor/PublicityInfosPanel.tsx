@@ -16,7 +16,7 @@ const WIDTH = 550;
 
 function PublicityInfosPanel(props: {
   publicityInfos: publicityInfoType[];
-  selectedPublicityInfoId: publicityInfoType["_id"];
+  selectedPublicityInfoId: publicityInfoType["_id"] | undefined;
 }) {
   const history = useHistory();
   const theme = useCustomTheme();

@@ -26,7 +26,7 @@ const buttonMapping = {
 } as const;
 
 function DecisionPublicityButton(props: {
-  publicityInfoId: publicityInfoType["_id"];
+  publicityInfoId: publicityInfoType["_id"] | undefined;
   publicityAssessment: publicityAssessmentType;
   refetchPublicityInfos: () => void;
 }) {
