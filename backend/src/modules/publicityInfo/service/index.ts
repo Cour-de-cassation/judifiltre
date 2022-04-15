@@ -66,20 +66,25 @@ const publicityInfoService = {
   ) {
     const publicityInfoRepository = buildPublicityInfoRepository();
 
+    let deletedCount = 0;
+    let deletedErrors: string[] = [];
+
     await Promise.all(
       publicityInfosDto.map(async (publicityInfoDto) => {
         const hasBeenDeleted =
           await publicityInfoRepository.deleteBySourceIdAndSourceDb(
             publicityInfoDto
           );
-        if (!hasBeenDeleted) {
-          console.warn(
-            `Could not delete publicityInfo: {sourceId: ${publicityInfoDto.sourceId}, sourceDb: ${publicityInfoDto.sourceDb}}`
-          );
+        if (hasBeenDeleted) {
+          deletedCount++;
+        } else {
+          const error = `Could not delete publicityInfo: {sourceId: ${publicityInfoDto.sourceId}, sourceDb: ${publicityInfoDto.sourceDb}}`;
+          deletedErrors.push(error);
+          console.warn(error);
         }
       })
     );
-    return;
+    return { deletedCount, deletedErrors };
   },
 
   async updateAssessmentForPublicityInfo(
