@@ -64,6 +64,15 @@ function buildRoutes() {
   );
 
   router.get(
+    "/decisions-not-public",
+    buildController(async () => {
+      const publicityInfos =
+        await publicityInfoService.findAllDecisionsNotPublic();
+      return { kind: "success", response: publicityInfos };
+    })
+  );
+
+  router.get(
     "/login",
     buildController(
       async (params: { email: userType["email"]; password: string }) => {

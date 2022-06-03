@@ -34,6 +34,24 @@ const publicityInfoService = {
     };
   },
 
+  async findAllDecisionsNotPublic() {
+    const publicityInfoRepository = buildPublicityInfoRepository();
+
+    const frozenPublicityInfos = await publicityInfoRepository.findAll();
+    const notPublicDecisions = [];
+    for (const publicityInfo of frozenPublicityInfos) {
+      if (publicityInfo.publicity.assessment === "notPublic") {
+        notPublicDecisions.push({
+          sourceId: publicityInfo.sourceId,
+          sourceDb: publicityInfo.sourceDb,
+        });
+      }
+    }
+    return {
+      notPublicDecisions,
+    };
+  },
+
   async findById(_id: publicityInfoType["_id"]) {
     const publicityInfoRepository = buildPublicityInfoRepository();
 
