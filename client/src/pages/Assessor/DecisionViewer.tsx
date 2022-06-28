@@ -17,51 +17,39 @@ function DecisionViewer(props: {
   const theme = useCustomTheme();
   const styles = buildStyles(theme);
 
-  if (!props.publicityInfoId) {
-    return (
-      <div style={styles.container}>
-        <div style={styles.documentContainer}>
-          <table style={styles.documentTextTable}>
-            <tbody>Aucune décision sélectionée.</tbody>
-          </table>
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <DecisionDataFetcher params={{ publicityInfoId: props.publicityInfoId }}>
-        {({ decision }) => (
-          <div style={styles.container}>
-            <div style={styles.buttonContainer}>
-              <DecisionPublicityButton
-                publicityInfoId={props.publicityInfoId}
-                publicityAssessment="notPublic"
-                refetchPublicityInfos={props.refetchPublicityInfos}
-              />
-              <DecisionPublicityButton
-                publicityInfoId={props.publicityInfoId}
-                publicityAssessment="public"
-                refetchPublicityInfos={props.refetchPublicityInfos}
-              />
-            </div>
-            <div style={styles.documentContainer}>
-              <table style={styles.documentTextTable}>
-                <tbody>
-                  {lineSplitter
-                    .splitTextAccordingToNewLine(decision)
-                    .map((line, index) => (
-                      <tr key={index}>
-                        <td style={styles.lineCell}>{line}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
+  return (
+    <DecisionDataFetcher params={{ publicityInfoId: props.publicityInfoId }}>
+      {({ decision }) => (
+        <div style={styles.container}>
+          <div style={styles.buttonContainer}>
+            <DecisionPublicityButton
+              publicityInfoId={props.publicityInfoId}
+              publicityAssessment="notPublic"
+              refetchPublicityInfos={props.refetchPublicityInfos}
+            />
+            <DecisionPublicityButton
+              publicityInfoId={props.publicityInfoId}
+              publicityAssessment="public"
+              refetchPublicityInfos={props.refetchPublicityInfos}
+            />
           </div>
-        )}
-      </DecisionDataFetcher>
-    );
-  }
+          <div style={styles.documentContainer}>
+            <table style={styles.documentTextTable}>
+              <tbody>
+                {lineSplitter
+                  .splitTextAccordingToNewLine(decision)
+                  .map((line, index) => (
+                    <tr key={index}>
+                      <td style={styles.lineCell}>{line}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+    </DecisionDataFetcher>
+  );
 }
 
 function buildStyles(theme: customThemeType) {
@@ -74,7 +62,7 @@ function buildStyles(theme: customThemeType) {
       boxSizing: "border-box",
     },
     documentContainer: {
-      minWidth: TEXT_CONTENT_WIDTH,
+      maxWidth: TEXT_CONTENT_WIDTH,
       margin: "0 auto",
       flexGrow: 1,
       overflowY: "auto",
