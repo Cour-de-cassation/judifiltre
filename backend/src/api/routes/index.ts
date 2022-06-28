@@ -107,11 +107,14 @@ function buildRoutes() {
       async (params: {
         publicityInfosDto: Array<publicityInfoDeletionDtoType>;
       }) => {
-        await publicityInfoService.deleteMany(params.publicityInfosDto);
+        const { deletedCount, deletedErrors } =
+          await publicityInfoService.deleteMany(params.publicityInfosDto);
         return {
           kind: "success",
-          response: "publicityInfos deleted",
-          statusCode: 204,
+          response:
+            `${deletedCount} publicityInfos deleted.` +
+            (deletedErrors && ` Errors: ${deletedErrors.join(", ")}`),
+          statusCode: deletedErrors ? 206 : 200,
         };
       },
       (request) => ({
