@@ -1,7 +1,7 @@
 #######################
 # Step 1: Base target #
 #######################
-FROM node:16-alpine3.15 as base
+FROM node:16.15-alpine3.16 as base
 ARG http_proxy
 ARG https_proxy
 ARG no_proxy
@@ -53,4 +53,4 @@ USER node
 # Expose the listening port of your app
 EXPOSE ${API_PORT}
 
-CMD ["sh", "-c", "npm run start"]
+CMD ["sh", "-c", "node ./dist/index.js"]

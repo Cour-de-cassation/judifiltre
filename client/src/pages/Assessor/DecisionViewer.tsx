@@ -11,7 +11,7 @@ const LINE_MIN_HEIGHT = 10;
 const TEXT_CONTENT_WIDTH = "900px";
 
 function DecisionViewer(props: {
-  publicityInfoId: publicityInfoType["_id"];
+  publicityInfoId: publicityInfoType["_id"] | undefined;
   refetchPublicityInfos: () => void;
 }) {
   const theme = useCustomTheme();
