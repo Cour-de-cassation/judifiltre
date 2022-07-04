@@ -8,7 +8,6 @@ import { lineSplitter } from "../../services/lineSplitter";
 export { DecisionViewer };
 
 const LINE_MIN_HEIGHT = 10;
-const TEXT_CONTENT_WIDTH = "900px";
 
 function DecisionViewer(props: {
   publicityInfoId: publicityInfoType["_id"] | undefined;
@@ -68,13 +67,15 @@ function buildStyles(theme: customThemeType) {
   return {
     container: {
       display: "flex",
+      flexShrink: 1,
+      flexGrow: 1,
       flexDirection: "column-reverse",
       height: heights.adminPanel,
       padding: theme.spacing * 2,
       boxSizing: "border-box",
     },
     documentContainer: {
-      minWidth: TEXT_CONTENT_WIDTH,
+      width: "100%",
       margin: "0 auto",
       flexGrow: 1,
       overflowY: "auto",

@@ -12,7 +12,7 @@ import { routes } from "../routes";
 
 export { PublicityInfosPanel };
 
-const WIDTH = 550;
+const WIDTH = 650;
 
 function PublicityInfosPanel(props: {
   publicityInfos: publicityInfoType[];
@@ -102,9 +102,9 @@ function comparePublicityInfos(
 function buildStyles(theme: customThemeType) {
   return {
     panel: {
-      minWidth: WIDTH,
       height: heights.adminPanel,
       overflowY: "scroll",
+      flexShrink: 0,
     },
     title: {
       paddingLeft: `${theme.spacing * 4}px`,
