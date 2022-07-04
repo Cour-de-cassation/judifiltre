@@ -52,20 +52,20 @@ function buildStyles(theme: customThemeType) {
       color: "black",
     },
     cells: {
-      padding: theme.spacing * 2,
+      padding: theme.spacing / 2,
     },
     firstCells: {
-      padding: `${theme.spacing * 2}px ${theme.spacing * 2}px ${
+      padding: `${theme.spacing}px ${theme.spacing}px ${theme.spacing}px ${
         theme.spacing * 2
-      }px ${theme.spacing * 4}px`,
+      }px`,
     },
     selectedCells: {
-      padding: theme.spacing * 2,
+      padding: theme.spacing / 2,
       backgroundColor: "white",
     },
     selectedFirstCells: {
       padding: `${theme.spacing}px ${theme.spacing}px ${theme.spacing}px ${
-        theme.spacing * 4
+        theme.spacing * 2
       }px`,
       backgroundColor: "white",
     },
