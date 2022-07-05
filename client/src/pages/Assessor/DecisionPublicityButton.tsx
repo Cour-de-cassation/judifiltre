@@ -27,6 +27,7 @@ const buttonMapping = {
 
 function DecisionPublicityButton(props: {
   publicityInfoId: publicityInfoType["_id"] | undefined;
+  nextPublicityInfoId: publicityInfoType["_id"] | undefined;
   publicityAssessment: publicityAssessmentType;
   refetchPublicityInfos: () => void;
 }) {
@@ -53,7 +54,9 @@ function DecisionPublicityButton(props: {
           JSON.stringify({ publicityAssessment })
         );
         setIsUpdating(false);
-        history.push(routes.ASSESSOR_HOME.getPath());
+        history.push(
+          routes.ASSESSOR_HOME.getPath() + "/" + props.nextPublicityInfoId
+        );
         props.refetchPublicityInfos();
       } catch (e) {
         console.warn(e);
