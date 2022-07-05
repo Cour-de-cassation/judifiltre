@@ -11,6 +11,7 @@ const LINE_MIN_HEIGHT = 10;
 
 function DecisionViewer(props: {
   publicityInfoId: publicityInfoType["_id"] | undefined;
+  nextPublicityInfoId: publicityInfoType["_id"] | undefined;
   refetchPublicityInfos: () => void;
 }) {
   const theme = useCustomTheme();
@@ -34,11 +35,13 @@ function DecisionViewer(props: {
             <div style={styles.buttonContainer}>
               <DecisionPublicityButton
                 publicityInfoId={props.publicityInfoId}
+                nextPublicityInfoId={props.nextPublicityInfoId}
                 publicityAssessment="notPublic"
                 refetchPublicityInfos={props.refetchPublicityInfos}
               />
               <DecisionPublicityButton
                 publicityInfoId={props.publicityInfoId}
+                nextPublicityInfoId={props.nextPublicityInfoId}
                 publicityAssessment="public"
                 refetchPublicityInfos={props.refetchPublicityInfos}
               />
