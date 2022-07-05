@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { idModule } from "judifiltre-core";
+import { idModule, publicityInfoType } from "judifiltre-core";
 import { DecisionViewer } from "./DecisionViewer";
 import { PublicityInfosDataFetcher } from "./PublicityInfosDataFetcher";
 import { PublicityInfosPanel } from "./PublicityInfosPanel";
@@ -22,9 +22,10 @@ type assessorParamsType = {
 function Assessor() {
   const params = useParams<assessorParamsType>();
 
-  const publicityInfoId = params?.publicityInfoId
-    ? idModule.lib.buildId(params.publicityInfoId)
-    : undefined;
+  const publicityInfoId: publicityInfoType["_id"] | undefined =
+    params?.publicityInfoId
+      ? idModule.lib.buildId(params.publicityInfoId)
+      : undefined;
 
   const theme = useCustomTheme();
   const styles = buildStyles();
@@ -42,7 +43,23 @@ function Assessor() {
       </MenuBar>
       <PublicityInfosDataFetcher>
         {({ publicityInfos, refetch }) => {
-          console.log(publicityInfos);
+          let nextPublicityInfoId: publicityInfoType["_id"] | undefined =
+            undefined;
+          if (publicityInfoId) {
+            nextPublicityInfoId =
+              publicityInfos?.[
+                (parseInt(
+                  Object.keys(publicityInfos).filter(function (key) {
+                    return idModule.lib.equalId(
+                      publicityInfos[key as any]._id,
+                      publicityInfoId
+                    );
+                  })?.[0]
+                ) as number) + 1
+              ]?._id ??
+              publicityInfos?.[0]?._id ??
+              undefined;
+          }
           return publicityInfos.length > 0 ? (
             <div style={styles.container}>
               <PublicityInfosPanel
@@ -51,6 +68,7 @@ function Assessor() {
               />
               <DecisionViewer
                 publicityInfoId={publicityInfoId}
+                nextPublicityInfoId={nextPublicityInfoId}
                 refetchPublicityInfos={refetch}
               />
             </div>
