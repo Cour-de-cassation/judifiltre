@@ -1,5 +1,9 @@
+echo "▶️   cleans node_modules & k3s for fresh build & deploy"
+k3s-uninstall > /dev/null 2>&1;
+rm -rf node_modules */node_modules > /dev/null 2>&1
 for APP_ID in judifiltre-backend judifiltre-client;do
-    export eval $(cat .env-sample-${APP_ID});
+    echo "▶️   build & deploy $APP_ID"
+    set -a; source .env-sample-${APP_ID}; set +a;
     if [ "${APP_ID}" == "judifiltre-client" ]; then
         yarn buildClient;
     else
