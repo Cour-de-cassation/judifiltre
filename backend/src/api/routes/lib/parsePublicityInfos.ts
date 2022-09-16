@@ -40,6 +40,7 @@ function parsePublicityInfos(
     return {
       _id: idModule.lib.buildId(),
       decisionDate: decisionDate?.getTime(),
+      creationDate: Date.now(),
       sourceDb: publicityInfoDto.sourceDb,
       sourceId: publicityInfoDto.sourceId,
       jurisdiction: publicityInfoDto.jurisdictionName,

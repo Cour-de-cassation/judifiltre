@@ -34,6 +34,9 @@ function PublicityInfosPanel(props: {
               <Text>ID</Text>
             </th>
             <th>
+              <Text>Date</Text>
+            </th>
+            <th>
               <Text>Siège</Text>
             </th>
             <th>

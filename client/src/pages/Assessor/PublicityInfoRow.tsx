@@ -1,4 +1,5 @@
 import React from "react";
+import dateFormat from "dateformat";
 import { publicityInfoType } from "judifiltre-core";
 import { customThemeType, Text, useCustomTheme } from "pelta-design-system";
 
@@ -21,6 +22,11 @@ function PublicityInfoRow(props: {
         style={props.isSelected ? styles.selectedFirstCells : styles.firstCells}
       >
         <Text>{props.publicityInfo.sourceId}</Text>
+      </td>
+      <td style={props.isSelected ? styles.selectedCells : styles.cells}>
+        <Text>
+          {dateFormat(props.publicityInfo.decisionDate, "dd/mm/yyyy")}
+        </Text>
       </td>
       <td style={props.isSelected ? styles.selectedCells : styles.cells}>
         <Text>{props.publicityInfo.jurisdiction}</Text>
