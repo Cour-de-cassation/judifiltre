@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: judifiltre-config
+  namespace: ${KUBE_NAMESPACE}
+data:
+  JURINET_DBNAME: SDER
+  JURICA_DBNAME: SDER
+  JUDIFILTRE_DBNAME: judifiltredb
+  ROOT_PATH: ${ROOT_PATH}
+  BASE_URL: ${BASE_URL}
+  API_PORT: ${API_PORT}
