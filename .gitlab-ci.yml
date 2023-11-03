@@ -23,11 +23,32 @@ build_judifiltre_backend:
     - docker push $CI_REGISTRY/cour-de-cassation/judifiltre:backend-$CI_COMMIT_BRANCH-$CI_COMMIT_SHORT_SHA
   only:
     - master
+    - re7
   tags:
     - docker
 
+build_judifiltre_client:
+  stage: build
+  variables:
+    HTTP_PROXY: $HTTP_PROXY
+    HTTPS_PROXY: $HTTPS_PROXY
+  script:
+    - echo $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - echo "$HTTP_PROXY"
+    - echo "$HTTPS_PROXY"
+    - docker build
+      -f Dockerfile.judifiltre-client
+      --build-arg http_proxy=$HTTP_PROXY
+      --build-arg https_proxy=$HTTPS_PROXY
+      -t $CI_REGISTRY/cour-de-cassation/judifiltre:client-$CI_COMMIT_BRANCH-$CI_COMMIT_SHORT_SHA .
+    - docker push $CI_REGISTRY/cour-de-cassation/judifiltre:client-$CI_COMMIT_BRANCH-$CI_COMMIT_SHORT_SHA
+  only:
+    - master
+    - re7
+  tags:
+    - docker
 
-deploy_judifiltre_backend:
+deploy_judifiltre:
   stage: deploy
   variables:
     DOLLAR: $DOLLAR
@@ -44,6 +65,7 @@ deploy_judifiltre_backend:
     - envsubst < k8s_v2/ingress-dev.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
     - envsubst < k8s_v2/ingress-dev.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
     - envsubst < k8s_v2/deployment-judifiltre-backend.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
+    - envsubst < k8s_v2/deployment-judifiltre-client.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
   only:
     - master
       - envsubst < k8s_v2/ingress-dev.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
@@ -53,3 +75,4 @@ deploy_judifiltre_backend:
     - shell
   dependencies:
     - build_judifiltre_backend
+    - build_judifiltre_client
