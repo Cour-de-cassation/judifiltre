@@ -14,7 +14,7 @@ spec:
         app: ${APP_ID}
     spec:
       containers:
-      - name: ${APP_ID}
+      - name: ${APP_ID}-backend
         image: ${CI_REGISTRY}/cour-de-cassation/judifiltre:backend-${CI_COMMIT_BRANCH}-${CI_COMMIT_SHORT_SHA}
         ports:
         - containerPort: ${API_PORT}

@@ -41,10 +41,14 @@ deploy_judifiltre_backend:
     - envsubst < k8s_v2/namespace-judifiltre.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
     - envsubst < k8s_v2/configmap-judifiltre.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
     - envsubst < k8s_v2/secret-judifiltre.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
-    - envsubst < k8s_v2/ingress-local.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
+    - envsubst < k8s_v2/ingress-dev.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
+    - envsubst < k8s_v2/ingress-dev.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
     - envsubst < k8s_v2/deployment-judifiltre-backend.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
   only:
     - master
+      - envsubst < k8s_v2/ingress-dev.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
+    - re7
+      - envsubst < k8s_v2/ingress-preprod.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
   tags:
     - shell
   dependencies:

@@ -14,10 +14,13 @@ spec:
         app: ${APP_ID}
     spec:
       containers:
-      - name: ${APP_ID}
-        image: ${DOCKER_USERNAME}/${APP_ID}:${VERSION}
+      - name: ${APP_ID}-client
+        image: ${CI_REGISTRY}/cour-de-cassation/judifiltre:client-${CI_COMMIT_BRANCH}-${CI_COMMIT_SHORT_SHA}
         ports:
         - containerPort: ${API_PORT}
+        envFrom:
+          - configMapRef:
+              name: judifiltre-config
         livenessProbe:
           exec:
             command:
