@@ -7,11 +7,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${APP_ID}
+      app: ${APP_ID}-backend
   template:
     metadata:
       labels:
-        app: ${APP_ID}
+        app: ${APP_ID}-backend
     spec:
       containers:
       - name: ${APP_ID}-backend

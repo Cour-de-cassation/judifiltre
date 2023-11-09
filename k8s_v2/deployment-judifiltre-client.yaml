@@ -7,15 +7,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${APP_ID}
+      app: ${APP_ID}-client
   template:
     metadata:
       labels:
-        app: ${APP_ID}
+        app: ${APP_ID}-client
     spec:
       containers:
       - name: ${APP_ID}-client
-        image: ${DOCKER_USERNAME}/${APP_ID}:${VERSION}
+        image:  ${CI_REGISTRY}/cour-de-cassation/judifiltre:client-${CI_COMMIT_BRANCH}-${CI_COMMIT_SHORT_SHA}
         ports:
         - containerPort: ${API_PORT}
         livenessProbe:

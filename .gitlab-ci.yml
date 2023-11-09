@@ -3,8 +3,8 @@ services:
   - docker:20.10.22-dind
 
 stages:
-#  - build_application
-#  - build_image
+  - build_application
+  - build_image
   - deploy
 
 #build_judifiltre_application:
@@ -47,6 +47,47 @@ stages:
 #  tags:
 #    - docker
 
+build_judifiltre_client:
+  stage: build_application
+  image: node:16
+  variables:
+    HTTP_PROXY: $HTTP_PROXY
+    HTTPS_PROXY: $HTTPS_PROXY
+  script:
+    - yarn config set proxy $HTTP_PROXY
+    - yarn config set https-proxy $HTTPS_PROXY
+    - yarn
+    - yarn buildClient
+  only:
+    - master
+    - dev
+  tags:
+    - docker
+
+build_judifiltre_client_image:
+  stage: build_image
+  variables:
+    HTTP_PROXY: $HTTP_PROXY
+    HTTPS_PROXY: $HTTPS_PROXY
+  script:
+    - echo $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    - echo "$HTTP_PROXY"
+    - echo "$HTTPS_PROXY"
+    - ls
+    - docker build
+        -f Dockerfile.judifiltre-client
+        --build-arg http_proxy=$HTTP_PROXY
+        --build-arg https_proxy=$HTTPS_PROXY
+        -t $CI_REGISTRY/cour-de-cassation/judifiltre:client-$CI_COMMIT_BRANCH-$CI_COMMIT_SHORT_SHA .
+    - docker push $CI_REGISTRY/cour-de-cassation/judifiltre:client-$CI_COMMIT_BRANCH-$CI_COMMIT_SHORT_SHA
+  only:
+    - master
+    - dev
+  dependencies:
+    - build_judifiltre_client
+  tags:
+    - docker
+
 
 deploy_judifiltre_backend:
   stage: deploy
@@ -62,6 +103,7 @@ deploy_judifiltre_backend:
     - envsubst < k8s_v2/namespace-judifiltre.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
     - envsubst < k8s_v2/configmap-judifiltre.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
     - envsubst < k8s_v2/secret-judifiltre.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
+    - envsubst < k8s_v2/service-backend.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
     - envsubst < k8s_v2/ingress-preprod.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
     - envsubst < k8s_v2/deployment-judifiltre-backend.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
   only:
@@ -71,3 +113,24 @@ deploy_judifiltre_backend:
     - shell
 #  dependencies:
 #    - build_judifiltre_image
+
+deploy_judifiltre_client:
+  stage: deploy
+  variables:
+    DOLLAR: $DOLLAR
+    KUBE_NAMESPACE: $KUBE_NAMESPACE
+    APP_ID: judifiltre-client
+    APP_HOST: judifiltre.judilibre-prive.local
+    API_PORT: 8080
+  script:
+    - envsubst < k8s_v2/namespace-judifiltre.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
+    - envsubst < k8s_v2/ingress-preprod.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
+    - envsubst < k8s_v2/service-client.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
+    - envsubst < k8s_v2/deployment-judifiltre-client.yaml | kubectl --kubeconfig=/home/gitlab-runner/.kube/$CI_COMMIT_BRANCH apply -f -
+  only:
+    - master
+    - dev
+  tags:
+    - shell
+  dependencies:
+    - build_judifiltre_client_image
