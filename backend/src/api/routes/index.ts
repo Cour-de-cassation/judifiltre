@@ -21,7 +21,7 @@ function buildRoutes() {
 
   router.get(
     "/publicityInfos",
-    buildAuthenticatedController(async () => {
+    buildController(async () => {
       const publicityInfos = await publicityInfoService.findAll();
       return {
         kind: "success",
