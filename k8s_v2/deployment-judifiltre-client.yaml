@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_ID}-client-deployment
+  namespace: ${KUBE_NAMESPACE}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${APP_ID}-client
+  template:
+    metadata:
+      labels:
+        app: ${APP_ID}-client
+    spec:
+      containers:
+      - name: ${APP_ID}-client
+        image:  ${CI_REGISTRY}/cour-de-cassation/judifiltre:client-${CI_COMMIT_BRANCH}-${CI_COMMIT_SHORT_SHA}
+        ports:
+        - containerPort: ${API_PORT}
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - curl -s -k --fail --max-time 2 "http://localhost:${API_PORT}/" | egrep -q 'html'
+          initialDelaySeconds: 60
+          periodSeconds: 15
+          failureThreshold: 3
+          timeoutSeconds: 5
+        securityContext:
+          runAsUser: 1000
+          capabilities:
+            drop:
+              - all
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+
+

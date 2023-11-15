@@ -4,9 +4,7 @@ This application provides an simple interface to discriminate decisions accordin
 
 # Prerequisites
 
-You must have installed on your computer the following :
-
-- `node v>=12.0.0`
+You must use the version 16 of Node.js in order to compile the project.
 
 # Run
 

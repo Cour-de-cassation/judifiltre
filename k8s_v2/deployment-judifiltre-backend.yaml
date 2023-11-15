@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_ID}-backend-deployment
+  namespace: ${KUBE_NAMESPACE}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${APP_ID}-backend
+  template:
+    metadata:
+      labels:
+        app: ${APP_ID}-backend
+    spec:
+      containers:
+      - name: ${APP_ID}-backend
+        image: docker.io/opendatajustice/judifiltre-backend@sha256:025814cf9bbbd6af29f1f6b8abe0aef09b12fc07e3fee14ae02f96b33a76994e
+        ports:
+        - containerPort: ${API_PORT}
+        envFrom:
+          - configMapRef:
+              name: judifiltre-config
+          - secretRef:
+              name: import-secrets
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - curl -s -k --fail --max-time 2 "http://localhost:${API_PORT}/${ROOT_PATH}/health" | egrep -q '${APP_KEYWORD}'
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          timeoutSeconds: 2
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - curl -s -k --fail --max-time 2 "http://localhost:${API_PORT}/${ROOT_PATH}/health" | egrep -q '${APP_KEYWORD}'
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          failureThreshold: 10
+          timeoutSeconds: 2
+        securityContext:
+          runAsUser: 1000
+          capabilities:
+            drop:
+              - all
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true

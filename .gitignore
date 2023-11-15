@@ -38,4 +38,4 @@ scripts/docker-check.sh
 scripts/docker-build.sh
 scripts/update_app.sh
 scripts/clean_old_replicas.sh
-k8s*
+.idea
